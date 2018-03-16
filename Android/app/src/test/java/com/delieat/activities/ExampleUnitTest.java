@@ -1,4 +1,4 @@
-package com.delieat.delieatandroid;
+package com.delieat.activities;
 
 import org.junit.Test;
 

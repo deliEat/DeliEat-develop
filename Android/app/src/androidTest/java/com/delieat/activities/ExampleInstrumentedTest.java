@@ -1,4 +1,4 @@
-package com.delieat.delieatandroid;
+package com.delieat.activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
