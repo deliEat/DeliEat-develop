@@ -1,10 +1,12 @@
 package com.delieat.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordTextView.getText().toString();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://10.0.2.2:3000/login";
+        final String url ="http://192.168.0.28:3000/login";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
             new Response.Listener<String>() {
@@ -48,7 +50,12 @@ public class LoginActivity extends AppCompatActivity {
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    // TODO
+                    Context context = getApplicationContext();
+                    CharSequence text = "Login failed!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
             }
         ) {
@@ -75,5 +82,10 @@ public class LoginActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
+
+    public void clickRegister(View view) {
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+    }
+
 
 }
