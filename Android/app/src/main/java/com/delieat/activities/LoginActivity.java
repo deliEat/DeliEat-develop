@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordTextView.getText().toString();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://192.168.0.28:3000/login";
+        final String url ="http://10.0.2.2:3000/login";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
             new Response.Listener<String>() {
