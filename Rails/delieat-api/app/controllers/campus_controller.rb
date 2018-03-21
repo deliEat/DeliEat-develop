@@ -1,0 +1,2 @@
+class CampusController < ApplicationController
+end
