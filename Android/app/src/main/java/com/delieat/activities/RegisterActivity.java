@@ -1,7 +1,6 @@
 package com.delieat.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,18 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * Created by kayciwang on 2018-03-18.
- */
 
 public class RegisterActivity extends AppCompatActivity {
     @Override
@@ -53,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://10.0.2.2:3000/register";
+        final String url = "http://10.0.2.2:3000/register";
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, parentData,
                 new Response.Listener<JSONObject>() {

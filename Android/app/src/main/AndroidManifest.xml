@@ -20,11 +20,12 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".CustomerHomeActivity" />
-        <activity android:name=".ManagerHomeActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".ManagerHomeActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AddRestaurantActivity"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs"/>
+            android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
     </application>
 
 </manifest>
