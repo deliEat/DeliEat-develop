@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.delieat.models.User;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -25,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = "Passwords do not match!";
+            CharSequence text = getString(R.string.password_do_not_match);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
@@ -35,12 +37,11 @@ public class RegisterActivity extends AppCompatActivity {
     public void redirectToOwnerRegistration(View view) {
         if (verifyPassword()) {
             storeUserData();
-            //TODO: create a new activity for owner registration
-            Intent intent = new Intent(RegisterActivity.this, RegisterCustomerActivity.class);
+            Intent intent = new Intent(RegisterActivity.this, RegisterOwnerActivity.class);
             startActivity(intent);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = "Passwords do not match!";
+            CharSequence text = getString(R.string.password_do_not_match);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
@@ -65,8 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
 
-        editor.putString("username", username);
-        editor.putString("password", password);
+        editor.putString(User.USERNAME, username);
+        editor.putString(User.PASSWORD, password);
         editor.commit();
     }
 

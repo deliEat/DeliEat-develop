@@ -7,4 +7,5 @@
     <string name="login">Login</string>
     <string name="add_restaurant">Add Restaurant</string>
     <string name="login_fail_msg">Login failed!</string>
+    <string name="password_do_not_match">Passwords do not match!</string>
 </resources>
