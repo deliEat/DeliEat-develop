@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.delieat.activities.CustomerHomeActivity">
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="548dp"
+        tools:layout_editor_absoluteY="3dp" />
+
     <HorizontalScrollView
         android:layout_width="0dp"
         android:layout_height="36dp"
@@ -22,9 +29,4 @@
             android:orientation="vertical" />
     </HorizontalScrollView>
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </android.support.constraint.ConstraintLayout>
