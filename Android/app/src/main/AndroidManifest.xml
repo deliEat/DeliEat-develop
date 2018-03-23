@@ -14,21 +14,20 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
         <activity android:name=".CustomerHomeActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".ManagerHomeActivity" />
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterCustomerActivity" />
+        <activity android:name=".RegisterOwnerActivity" />
         <activity android:name=".RestaurantAddActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
 
-        <activity android:name=".RegisterOwnerActivity"></activity>
     </application>
 
 </manifest>
