@@ -47,25 +47,25 @@ public class RegisterActivity extends AppCompatActivity {
         final String url = "http://10.0.2.2:3000/register";
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, parentData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
-                        finish();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.toString());
-                        Context context = getApplicationContext();
-                        CharSequence text = error.toString();
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                    }
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    System.out.println(response.toString());
+                    finish();
                 }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println(error.toString());
+                    Context context = getApplicationContext();
+                    CharSequence text = error.toString();
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
         );
 
         queue.add(stringRequest);

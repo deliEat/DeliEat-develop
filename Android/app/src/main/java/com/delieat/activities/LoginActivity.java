@@ -14,6 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.delieat.models.User;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,11 +41,16 @@ public class LoginActivity extends AppCompatActivity {
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    System.out.println(response);
-                    if ("C".equalsIgnoreCase(response)) {
-                        startActivity(new Intent(LoginActivity.this, CustomerHomeActivity.class));
-                    } else if ("R".equalsIgnoreCase(response)) {
-                        startActivity(new Intent(LoginActivity.this, ManagerHomeActivity.class));
+                    Gson gson = new Gson();
+                    User currentUser = gson.fromJson(response, User.class);
+                    if ("C".equalsIgnoreCase(currentUser.getUserType())) {
+                        Intent intent = new Intent(LoginActivity.this, CustomerHomeActivity.class);
+                        intent.putExtra("userId", currentUser.getId());
+                        startActivity(intent);
+                    } else if ("R".equalsIgnoreCase(currentUser.getUserType())) {
+                        Intent intent = new Intent(LoginActivity.this, ManagerHomeActivity.class);
+                        intent.putExtra("userId", currentUser.getId());
+                        startActivity(intent);
                     }
                 }
             },
@@ -51,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Context context = getApplicationContext();
-                    CharSequence text = "Login failed!";
+                    CharSequence text = getString(R.string.login_fail_msg);
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
@@ -86,6 +93,5 @@ public class LoginActivity extends AppCompatActivity {
     public void clickRegister(View view) {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
-
 
 }

@@ -4,13 +4,11 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
-
         render :json => @users
     end
 
     def register
         @user = User.new(user_params)
-
         @user.save
     end
 
@@ -18,7 +16,7 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username], password: params[:password])
 
         if @user
-            render plain: @user[:user_type]
+            render :json => @user
         else
             render plain: 'false'
         end

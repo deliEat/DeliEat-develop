@@ -22,10 +22,13 @@
         <activity android:name=".CustomerHomeActivity" />
         <activity android:name=".ManagerHomeActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".AddRestaurantActivity"></activity>
+        <activity android:name=".RestaurantAddActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
+
+        <activity android:name=".RegisterOwnerActivity"></activity>
     </application>
 
 </manifest>
