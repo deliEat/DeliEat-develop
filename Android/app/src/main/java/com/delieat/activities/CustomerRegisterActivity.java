@@ -32,17 +32,14 @@ public class CustomerRegisterActivity extends AppCompatActivity{
     public void register(View view) {
         final TextView usernameTextView = findViewById(R.id.username);
         final TextView passwordTextView = findViewById(R.id.password);
-        final TextView userTypeTextView = findViewById(R.id.userType);
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
-        final String userType = userTypeTextView.getText().toString();
 
         JSONObject parentData = new JSONObject();
         JSONObject childData = new JSONObject();
         try {
             childData.put("username", username);
             childData.put("password", password);
-            childData.put("user_type", userType);
             parentData.put("user", childData);
         } catch (JSONException e) {
             e.printStackTrace();
