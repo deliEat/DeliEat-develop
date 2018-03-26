@@ -1,16 +1,29 @@
 package com.delieat.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.delieat.constants.UserSession;
+import com.delieat.constants.UserType;
+
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        session = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if (isLoggedIn()) {
+            redirectToHomeActivity(savedInstanceState);
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -20,4 +33,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
+    private boolean isLoggedIn() {
+        return session.getString(UserSession.USER_NAME, null) != null;
+    }
+
+    private void redirectToHomeActivity(Bundle savedInstanceState) {
+        String userType = session.getString(UserSession.USER_TYPE, null);
+        if (UserType.isCustomer(userType)) {
+            startActivity(new Intent(this, CustomerHomeActivity.class), savedInstanceState);
+        } else if (UserType.isOwner(userType)) {
+            startActivity(new Intent(this, OwnerHomeActivity.class), savedInstanceState);
+        }
+    }
+
 }

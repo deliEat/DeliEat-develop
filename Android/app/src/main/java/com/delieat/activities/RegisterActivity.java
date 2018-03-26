@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void storeUserData() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPref.edit();
 
         final TextView usernameTextView = findViewById(R.id.username);
@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         editor.putString(User.USERNAME, username);
         editor.putString(User.PASSWORD, password);
-        editor.commit();
+        editor.apply();
     }
 
 }

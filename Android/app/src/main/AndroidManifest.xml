@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".CustomerHomeActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ManagerHomeActivity" />
+        <activity android:name=".OwnerHomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".RegisterCustomerActivity" />
         <activity android:name=".RegisterOwnerActivity" />
@@ -27,7 +27,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
-
     </application>
 
 </manifest>

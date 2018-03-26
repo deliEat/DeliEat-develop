@@ -5,16 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ManagerHomeActivity extends AppCompatActivity {
+public class OwnerHomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_home);
+        setContentView(R.layout.activity_owner_home);
     }
 
-    public void goToRestaurantAdd(View view) {
-        startActivity(new Intent(ManagerHomeActivity.this, RestaurantAddActivity.class));
+    public void redirectToRestaurantAdd(View view) {
+        startActivity(new Intent(OwnerHomeActivity.this, RestaurantAddActivity.class));
     }
 
 }
