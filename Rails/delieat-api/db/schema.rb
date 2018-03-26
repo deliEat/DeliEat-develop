@@ -34,11 +34,19 @@ ActiveRecord::Schema.define(version: 20180323032322) do
   end
 
   create_table "customers", force: :cascade do |t|
+<<<<<<< HEAD
+=======
+    t.integer "user_id"
+>>>>>>> Added customer registration
     t.string "full_name"
     t.integer "phone_number"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
+=======
+    t.index ["user_id"], name: "index_customers_on_user_id"
+>>>>>>> Added customer registration
   end
 
   create_table "menu_items", force: :cascade do |t|
@@ -60,9 +68,11 @@ ActiveRecord::Schema.define(version: 20180323032322) do
   end
 
   create_table "owners", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_owners_on_user_id"
   end
 
   create_table "restaurants", force: :cascade do |t|

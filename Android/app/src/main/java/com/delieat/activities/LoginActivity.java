@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view) {
         final TextView usernameTextView = findViewById(R.id.username);
-        final TextView passwordTextView = findViewById(R.id.password);
+        final TextView passwordTextView = findViewById(R.id.fullName);
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
 

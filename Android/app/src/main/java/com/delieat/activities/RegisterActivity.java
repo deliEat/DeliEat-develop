@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean verifyPassword() {
-        final TextView passwordTextView = findViewById(R.id.password);
+        final TextView passwordTextView = findViewById(R.id.fullName);
         final TextView passwordConfirmTextView = findViewById(R.id.passwordConfirm);
         final String password = passwordTextView.getText().toString();
         final String confirmPassword = passwordConfirmTextView.getText().toString();
@@ -58,11 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void storeUserData() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("registerData", 0);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         final TextView usernameTextView = findViewById(R.id.username);
-        final TextView passwordTextView = findViewById(R.id.password);
+        final TextView passwordTextView = findViewById(R.id.fullName);
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
 

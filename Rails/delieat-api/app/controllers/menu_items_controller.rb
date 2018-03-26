@@ -1,4 +1,4 @@
-class MenuItemController < ApplicationController
+class MenuItemsController < ApplicationController
 
   def create
     @menu_item = MenuItem.new(create_params)
