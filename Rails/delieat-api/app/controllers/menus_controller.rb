@@ -1,4 +1,4 @@
-class MenuController < ApplicationController
+class MenusController < ApplicationController
 
   def create
     @menu = Menu.new(create_params)

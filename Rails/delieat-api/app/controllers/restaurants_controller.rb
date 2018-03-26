@@ -1,4 +1,4 @@
-class RestaurantController < ApplicationController
+class RestaurantsController < ApplicationController
     # disable CSRF until a token authentication is implemented
     skip_before_action :verify_authenticity_token
 

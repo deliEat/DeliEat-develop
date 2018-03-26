@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     def register
         @user = User.new(user_params)
         @user.save
+        render :json => @user
     end
 
     def login

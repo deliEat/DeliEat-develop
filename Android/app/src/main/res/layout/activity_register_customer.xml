@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/fullName"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:onClick="register"
+        android:onClick="createUser"
         android:text="Register"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,5 +84,5 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/fullName" />
 </android.support.constraint.ConstraintLayout>
