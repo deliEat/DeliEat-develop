@@ -8,59 +8,54 @@
 
     <EditText
         android:id="@+id/fullName"
-        android:layout_width="0dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginStart="71dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/passwordConfirm"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
         android:id="@+id/passwordConfirm"
-        android:layout_width="0dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginStart="71dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/registerCustomer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullName" />
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="wrap_content"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/fullName"
-        app:layout_constraintStart_toStartOf="@+id/fullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <TextView
         android:id="@+id/registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
         android:text="Sign Up"
         android:textColor="@color/DeliEatPeach"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toStartOf="@+id/login"
-        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,22 +63,23 @@
         android:id="@+id/registerCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:onClick="redirectToCustomerRegistration"
         android:text="Register As Customer"
         app:layout_constraintBottom_toTopOf="@+id/registerOwner"
-        app:layout_constraintStart_toStartOf="@+id/registerOwner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordConfirm" />
 
     <Button
         android:id="@+id/registerOwner"
         android:layout_width="186dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
         android:onClick="redirectToOwnerRegistration"
         android:text="Register as owner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerCustomer" />
 
@@ -91,13 +87,13 @@
         android:id="@+id/login"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="86dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_height="38dp"
+        android:onClick="redirectToLoginActivity"
         android:text="Login"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/registerText"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

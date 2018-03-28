@@ -7,6 +7,14 @@ class OwnersController < ApplicationController
         render :json => @owners
     end
 
-    
+    def register
+        @owner = Owner.new(owner_params)
+        @owner.save
+        render :json => @owner
+    end
 
+    private
+    def owner_params
+        params.require(:owner).permit(:full_name, :user_id)
+    end
 end

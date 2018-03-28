@@ -20,6 +20,12 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
+    public void redirectToLoginActivity(View view) {
+        finish();
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     public void redirectToCustomerRegistration(View view) {
         if (verifyPassword()) {
             storeUserData();

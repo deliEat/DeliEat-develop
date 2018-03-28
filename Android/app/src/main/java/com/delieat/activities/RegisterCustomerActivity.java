@@ -28,6 +28,12 @@ public class RegisterCustomerActivity extends AppCompatActivity{
         setContentView(R.layout.activity_register_customer);
     }
 
+    public void redirectToLoginActivity(View view) {
+        finish();
+        Intent login = new Intent(RegisterCustomerActivity.this, LoginActivity.class);
+        startActivity(login);
+    }
+
     private void register(String id) {
         final TextView fullNameTextView = findViewById(R.id.fullName);
         final TextView emailTextView = findViewById(R.id.email);

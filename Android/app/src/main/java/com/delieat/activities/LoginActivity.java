@@ -49,8 +49,10 @@ public class LoginActivity extends AppCompatActivity {
                     User currentUser = gson.fromJson(response, User.class);
                     startUserSession(currentUser);
                     if (UserType.isCustomer(currentUser.getUserType())) {
+                        finish();
                         startActivity(new Intent(LoginActivity.this, CustomerHomeActivity.class));
                     } else if (UserType.isOwner(currentUser.getUserType())) {
+                        finish();
                         startActivity(new Intent(LoginActivity.this, OwnerHomeActivity.class));
                     }
                 }
@@ -92,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void clickRegister(View view) {
+        finish();
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
