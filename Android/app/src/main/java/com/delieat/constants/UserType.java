@@ -1,8 +1,8 @@
 package com.delieat.constants;
 
 public enum UserType {
-    CUSTOMER("C"),
-    OWNER("R");
+    CUSTOMER("customer"),
+    OWNER("owner");
 
     private final String rep;
 

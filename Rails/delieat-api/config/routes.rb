@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'login', to: 'users#login'
 
   post 'customer_register', to: 'customers#register'
+  post 'owner_register', to: 'owners#register'
 
   post 'add-restaurants', to: 'restaurants#create'
 
