@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -29,13 +28,13 @@ public class RegisterActivity extends AppCompatActivity {
     public void redirectToCustomerRegistration(View view) {
         if (verifyPassword()) {
             storeUserData();
+            finish();
             Intent intent = new Intent(RegisterActivity.this, RegisterCustomerActivity.class);
             startActivity(intent);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = getString(R.string.password_do_not_match);
             int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
+            Toast toast = Toast.makeText(context, R.string.passwords_do_not_match, duration);
             toast.show();
         }
     }
@@ -43,13 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
     public void redirectToOwnerRegistration(View view) {
         if (verifyPassword()) {
             storeUserData();
+            finish();
             Intent intent = new Intent(RegisterActivity.this, RegisterOwnerActivity.class);
             startActivity(intent);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = getString(R.string.password_do_not_match);
             int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
+            Toast toast = Toast.makeText(context, R.string.passwords_do_not_match, duration);
             toast.show();
         }
     }

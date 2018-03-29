@@ -16,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.delieat.constants.ApiUrls;
+import com.delieat.helpers.HttpHelper;
 import com.delieat.models.User;
 
 import org.json.JSONException;
@@ -54,10 +56,9 @@ public class RegisterCustomerActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final String urlCustomer = "http://10.0.2.2:3000/customer_register";
+        RequestQueue queue = HttpHelper.INSTANCE.getRequestQueue(getApplicationContext());
 
-        final JsonObjectRequest createCustomer = new JsonObjectRequest(Request.Method.POST, urlCustomer, parentData,
+        final JsonObjectRequest createCustomer = new JsonObjectRequest(Request.Method.POST, ApiUrls.REGISTER_CUSTOMER, parentData,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -83,7 +84,6 @@ public class RegisterCustomerActivity extends AppCompatActivity{
     }
 
     public void createUser(View view) {
-        final String urlRegister = "http://10.0.2.2:3000/register";
         SharedPreferences sharedPref = getSharedPreferences("registerData", 0);
         String username = sharedPref.getString(User.USERNAME, "");
         String password = sharedPref.getString(User.PASSWORD, "");
@@ -99,8 +99,8 @@ public class RegisterCustomerActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final JsonObjectRequest createUser = new JsonObjectRequest(Request.Method.POST, urlRegister, parentData,
+        RequestQueue queue = HttpHelper.INSTANCE.getRequestQueue(getApplicationContext());
+        final JsonObjectRequest createUser = new JsonObjectRequest(Request.Method.POST, ApiUrls.REGISTER_USER, parentData,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

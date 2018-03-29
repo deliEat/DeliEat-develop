@@ -23,15 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (isLoggedIn()) {
             redirectToHomeActivity(savedInstanceState);
+        } else {
+            redirectToLoginActivity(savedInstanceState);
         }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        }, 2000);
     }
 
     private boolean isLoggedIn() {
@@ -41,10 +35,23 @@ public class MainActivity extends AppCompatActivity {
     private void redirectToHomeActivity(Bundle savedInstanceState) {
         String userType = session.getString(UserSession.USER_TYPE, null);
         if (UserType.isCustomer(userType)) {
+            finish();
             startActivity(new Intent(this, CustomerHomeActivity.class), savedInstanceState);
         } else if (UserType.isOwner(userType)) {
+            finish();
             startActivity(new Intent(this, OwnerHomeActivity.class), savedInstanceState);
         }
+    }
+
+    private void redirectToLoginActivity(Bundle savedInstanceState) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }, 2000);
     }
 
 }

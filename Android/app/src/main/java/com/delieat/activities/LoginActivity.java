@@ -16,8 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.delieat.constants.ApiUrls;
 import com.delieat.constants.UserSession;
 import com.delieat.constants.UserType;
+import com.delieat.helpers.HttpHelper;
 import com.delieat.models.User;
 import com.google.gson.Gson;
 
@@ -38,10 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://10.0.2.2:3000/login";
+        RequestQueue queue = HttpHelper.INSTANCE.getRequestQueue(getApplicationContext());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiUrls.LOGIN,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
