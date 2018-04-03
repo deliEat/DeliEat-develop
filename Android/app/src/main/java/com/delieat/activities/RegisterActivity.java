@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.delieat.helpers.RegistrationHelper;
 import com.delieat.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -32,10 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, RegisterCustomerActivity.class);
             startActivity(intent);
         } else {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, R.string.passwords_do_not_match, duration);
-            toast.show();
+            Toast.makeText(getApplicationContext(), R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -46,10 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, RegisterOwnerActivity.class);
             startActivity(intent);
         } else {
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, R.string.passwords_do_not_match, duration);
-            toast.show();
+            Toast.makeText(getApplicationContext(), R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -63,7 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void storeUserData() {
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("registerData", 0);
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+            RegistrationHelper.REGISTRATION_DATA, 0);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         final TextView usernameTextView = findViewById(R.id.username);

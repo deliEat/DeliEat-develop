@@ -17,4 +17,8 @@ public enum UserType {
     public static boolean isOwner(String userType) {
         return OWNER.rep.equalsIgnoreCase(userType);
     }
+
+    public static String getRepresentation(UserType userType) {
+        return userType.rep;
+    }
 }

@@ -1,8 +1,10 @@
 package com.delieat.models;
 
 public class User {
+    public static final String ID = "id";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    public static final String USER_TYPE = "user_type";
 
     private String id;
     private String username;

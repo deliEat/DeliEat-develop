@@ -8,4 +8,6 @@
     <string name="add_restaurant">Add Restaurant</string>
     <string name="login_fail_msg">Login failed!</string>
     <string name="passwords_do_not_match">Passwords do not match!</string>
+    <string name="restaurant_name_hint">Restaurant Name</string>
+    <string name="cook_time_hint">Cook Time</string>
 </resources>
