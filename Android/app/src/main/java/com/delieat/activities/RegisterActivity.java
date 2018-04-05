@@ -1,6 +1,5 @@
 package com.delieat.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.delieat.constants.UserType;
 import com.delieat.helpers.RegistrationHelper;
 import com.delieat.models.User;
 
@@ -27,21 +27,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void redirectToCustomerRegistration(View view) {
-        if (verifyPassword()) {
-            storeUserData();
-            finish();
-            Intent intent = new Intent(RegisterActivity.this, RegisterCustomerActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(this, RegisterDetailActivity.class);
+        intent.putExtra(User.USER_TYPE, UserType.CUSTOMER);
+        redirectToRegisterDetail(intent);
     }
 
     public void redirectToOwnerRegistration(View view) {
+        Intent intent = new Intent(this, RegisterDetailActivity.class);
+        intent.putExtra(User.USER_TYPE, UserType.OWNER);
+        redirectToRegisterDetail(intent);
+    }
+
+    private void redirectToRegisterDetail(Intent intent) {
         if (verifyPassword()) {
             storeUserData();
             finish();
-            Intent intent = new Intent(RegisterActivity.this, RegisterOwnerActivity.class);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show();

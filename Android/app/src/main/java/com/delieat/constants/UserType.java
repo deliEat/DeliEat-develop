@@ -18,7 +18,7 @@ public enum UserType {
         return OWNER.rep.equalsIgnoreCase(userType);
     }
 
-    public static String getRepresentation(UserType userType) {
-        return userType.rep;
+    public String getRepresentation() {
+        return this.rep;
     }
 }

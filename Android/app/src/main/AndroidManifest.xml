@@ -21,8 +21,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".OwnerHomeActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".RegisterCustomerActivity" />
-        <activity android:name=".RegisterOwnerActivity" />
+        <activity android:name=".RegisterDetailActivity" />
         <activity android:name=".RestaurantAddActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"

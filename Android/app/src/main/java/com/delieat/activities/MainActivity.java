@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isLoggedIn() {
-        return session.getString(UserSession.USER_NAME, null) != null;
+        return session.getInt(UserSession.USER_ID, Integer.MIN_VALUE) != Integer.MIN_VALUE;
     }
 
     private void redirectToHomeActivity(Bundle savedInstanceState) {

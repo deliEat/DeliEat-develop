@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
-
-  get 'users', to: 'users#index'
-  post 'register-user', to: 'users#register'
-  post 'login', to: 'users#login'
-
-  post 'register-customer', to: 'customers#register'
-  
-  post 'register-owner', to: 'owners#register'
+  post 'login', to: 'account_service#login'
+  post 'register-owner', to: 'account_service#register_owner'
+  post 'register-customer', to: 'account_service#register_customer'
 
   post 'add-restaurants', to: 'restaurants#create'
-
 end

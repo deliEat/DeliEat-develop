@@ -5,6 +5,7 @@ public class User {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String USER_TYPE = "user_type";
+    public static final String USER = "user";
 
     private String id;
     private String username;

@@ -16,6 +16,8 @@ import com.delieat.constants.ApiUrls;
 import com.delieat.constants.UserSession;
 import com.delieat.constants.UserType;
 import com.delieat.helpers.HttpHelper;
+import com.delieat.models.Customer;
+import com.delieat.models.Owner;
 import com.delieat.models.User;
 import com.google.gson.Gson;
 
@@ -36,17 +38,23 @@ public class LoginActivity extends AppCompatActivity {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, ApiUrls.LOGIN,
                 composeLoginJsonRequest(),
                 (response) -> {
-                    Gson gson = new Gson();
-                    User currentUser = gson.fromJson(response.toString(), User.class);
+                    try {
+                        finish();
 
-                    startUserSession(currentUser);
-
-                    finish();
-
-                    if (UserType.isCustomer(currentUser.getUserType())) {
-                        startActivity(new Intent(this, CustomerHomeActivity.class));
-                    } else if (UserType.isOwner(currentUser.getUserType())) {
-                        startActivity(new Intent(this, OwnerHomeActivity.class));
+                        String userType = response.getString(User.USER_TYPE);
+                        if (UserType.isCustomer(userType)) {
+                            Customer customer = new Gson().fromJson(
+                                response.getJSONObject(Customer.CUSTOMER).toString(), Customer.class);
+                            startCustomerSession(customer);
+                            startActivity(new Intent(this, CustomerHomeActivity.class));
+                        } else if (UserType.isOwner(userType)) {
+                            Owner owner = new Gson().fromJson(
+                                response.getJSONObject(Owner.OWNER).toString(), Owner.class);
+                            startOwnerSession(owner);
+                            startActivity(new Intent(this, OwnerHomeActivity.class));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
                 (error) -> Toast.makeText(getApplicationContext(), R.string.login_fail_msg, Toast.LENGTH_SHORT).show());
@@ -68,12 +76,27 @@ public class LoginActivity extends AppCompatActivity {
         return request;
     }
 
-    private void startUserSession(User user) {
+    private void startOwnerSession(Owner owner) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(UserSession.USER_ID, user.getId())
-            .putString(UserSession.USER_NAME, user.getUsername())
-            .putString(UserSession.USER_TYPE, user.getUserType());
+        editor.putInt(UserSession.USER_ID, owner.getUser_id())
+            .putString(UserSession.USER_TYPE, UserType.OWNER.getRepresentation())
+            .putInt(UserSession.OWNER_ID, owner.getId())
+            .putString(UserSession.FULL_NAME, owner.getFull_name())
+            .putString(UserSession.PHONE_NUMBER, owner.getPhone_number())
+            .putString(UserSession.EMAIL, owner.getEmail());
+        editor.apply();
+    }
+
+    private void startCustomerSession(Customer customer) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(UserSession.USER_ID, customer.getUser_id())
+            .putString(UserSession.USER_TYPE, UserType.CUSTOMER.getRepresentation())
+            .putInt(UserSession.CUSTOMER_ID, customer.getId())
+            .putString(UserSession.FULL_NAME, customer.getFull_name())
+            .putString(UserSession.PHONE_NUMBER, customer.getPhone_number())
+            .putString(UserSession.EMAIL, customer.getEmail());
         editor.apply();
     }
 
