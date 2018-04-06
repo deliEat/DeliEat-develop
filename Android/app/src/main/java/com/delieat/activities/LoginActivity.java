@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void clickRegister(View view) {
         finish();
-        startActivity(new Intent(LoginActivity.this, RestaurantDisplayListActivity.class));
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
 }
