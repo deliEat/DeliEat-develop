@@ -23,6 +23,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".RegisterDetailActivity" />
         <activity android:name=".RestaurantAddActivity" />
+        <activity android:name=".RestaurantDisplayListActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
