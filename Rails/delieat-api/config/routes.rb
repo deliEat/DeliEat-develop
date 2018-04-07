@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post 'register-customer', to: 'account_service#register_customer'
 
   post 'add-restaurants', to: 'restaurants#create'
+  get 'restaurants', to: 'restaurants#index'
 end
