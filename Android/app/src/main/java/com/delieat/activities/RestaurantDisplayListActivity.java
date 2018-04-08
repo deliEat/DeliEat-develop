@@ -1,5 +1,6 @@
 package com.delieat.activities;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -24,6 +25,7 @@ import com.delieat.adapters.RestaurantsAdapter;
 import com.delieat.constants.ApiUrls;
 import com.delieat.helpers.HttpHelper;
 import com.delieat.models.Restaurant;
+import com.delieat.viewmodels.RestaurantsViewModel;
 
 
 import org.json.JSONArray;
@@ -46,6 +48,8 @@ public class RestaurantDisplayListActivity extends AppCompatActivity {
         rAdapter = new RestaurantsAdapter(this, restaurants);
         ListView listView = (ListView) findViewById(R.id.restaurants);
         listView.setAdapter(rAdapter);
+        RestaurantsViewModel restaurantsViewModel =
+                ViewModelProviders.of(this).get(RestaurantsViewModel.class);
         addRestaurants();
     }
 
