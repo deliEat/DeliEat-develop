@@ -6,14 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.delieat.constants.ApiUrls;
 import com.delieat.constants.UserType;
-import com.delieat.helpers.HttpHelper;
 import com.delieat.helpers.RegistrationHelper;
 import com.delieat.models.Customer;
 import com.delieat.models.Owner;
@@ -36,29 +30,29 @@ public class RegisterDetailActivity extends AppCompatActivity {
     }
 
     public void createUser(View view) {
-        UserType userType = (UserType) getIntent().getSerializableExtra(User.USER_TYPE);
-        String requestUrl = userType == UserType.OWNER ? ApiUrls.REGISTER_OWNER : ApiUrls.REGISTER_CUSTOMER;
-
-        RequestQueue queue = HttpHelper.INSTANCE.getRequestQueue(getApplicationContext());
-        try {
-            JSONObject request = composeUserRegistrationRequest(userType);
-            JsonObjectRequest createUserRequest = new JsonObjectRequest(Request.Method.POST, requestUrl, request,
-                (response) -> {
-                    try {
-                        finish();
-                        startActivity(new Intent(this, LoginActivity.class));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                },
-                (error) -> {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            );
-            queue.add(createUserRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        UserType userType = (UserType) getIntent().getSerializableExtra(User.USER_TYPE);
+//        String requestUrl = userType == UserType.OWNER ? ApiUrls.REGISTER_OWNER : ApiUrls.REGISTER_CUSTOMER;
+//
+//        RequestQueue queue = HttpHelper.INSTANCE.provideRequestQueue(getApplicationContext());
+//        try {
+//            JSONObject request = composeUserRegistrationRequest(userType);
+//            JsonObjectRequest createUserRequest = new JsonObjectRequest(Request.Method.POST, requestUrl, request,
+//                (response) -> {
+//                    try {
+//                        finish();
+//                        startActivity(new Intent(this, LoginActivity.class));
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                },
+//                (error) -> {
+//                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+//                }
+//            );
+//            queue.add(createUserRequest);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private JSONObject composeUserRegistrationRequest(UserType userType) throws JSONException {
