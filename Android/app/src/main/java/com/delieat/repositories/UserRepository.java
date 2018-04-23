@@ -6,7 +6,8 @@ import android.util.Log;
 
 import com.delieat.constants.ApiUrls;
 import com.delieat.constants.UserType;
-import com.delieat.helpers.HttpHelper;
+import com.delieat.dagger.HttpComponent;
+import com.delieat.helpers.Network.HttpHelper;
 import com.delieat.helpers.SessionHelper;
 import com.delieat.models.Customer;
 import com.delieat.models.Owner;
@@ -26,8 +27,8 @@ public class UserRepository {
     private final SessionHelper sessionHelper;
 
     @Inject
-    public UserRepository(HttpHelper httpHelper, SessionHelper sessionHelper) {
-        this.httpHelper = httpHelper;
+    public UserRepository(HttpComponent.Builder httpComponentBuilder, SessionHelper sessionHelper) {
+        this.httpHelper = httpComponentBuilder.build().httpHelper();
         this.sessionHelper = sessionHelper;
     }
 

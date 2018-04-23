@@ -1,4 +1,4 @@
-package com.delieat.helpers;
+package com.delieat.helpers.Network;
 
 import android.content.Context;
 
@@ -7,21 +7,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.delieat.DeliEatApp;
 
 import org.json.JSONObject;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import dagger.Component;
-
 @Singleton
 public class HttpHelper {
     private final RequestQueue requestQueue;
 
     @Inject
-    HttpHelper(Context appContext) {
+    public HttpHelper(Context appContext) {
         this.requestQueue = Volley.newRequestQueue(appContext);
     }
 

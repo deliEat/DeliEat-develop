@@ -1,5 +1,6 @@
 package com.delieat.activities;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +11,23 @@ import android.widget.TextView;
 import com.delieat.constants.UserType;
 import com.delieat.viewmodels.LoginViewModel;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class LoginActivity extends AppCompatActivity {
-    LoginViewModel viewModel;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
     }
 
     public void login(View view) {
@@ -25,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextView passwordTextView = findViewById(R.id.fullName);
         final String username = usernameTextView.getText().toString();
         final String password = passwordTextView.getText().toString();
-        viewModel.login(username, password).observe(this, userType -> {
+        loginViewModel.login(username, password).observe(this, userType -> {
             finish();
             if (UserType.isCustomer(userType)) {
                 startActivity(new Intent(this, CustomerHomeActivity.class));
@@ -39,4 +49,5 @@ public class LoginActivity extends AppCompatActivity {
         finish();
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
 }

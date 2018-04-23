@@ -12,7 +12,6 @@ import com.delieat.models.Owner;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Singleton
 public class SessionHelper {
     private final SharedPreferences session;
 
