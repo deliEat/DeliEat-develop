@@ -13,10 +13,6 @@ import com.delieat.models.Restaurant;
 
 import java.util.ArrayList;
 
-/**
- * Created by kayciwang on 2018-04-05.
- */
-
 public class RestaurantsAdapter extends ArrayAdapter<Restaurant>{
 
     public RestaurantsAdapter(Context context, ArrayList<Restaurant> restaurants) {

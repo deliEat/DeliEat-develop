@@ -6,11 +6,6 @@ import android.arch.lifecycle.ViewModel;
 import com.delieat.models.Restaurant;
 import java.util.List;
 
-
-/**
- * Created by kayciwang on 2018-04-07.
- */
-
 public class RestaurantsViewModel extends ViewModel {
     private MutableLiveData<List<Restaurant>> restaurants;
     public LiveData<List<Restaurant>> getRestaurants() {

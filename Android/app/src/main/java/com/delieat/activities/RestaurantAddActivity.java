@@ -1,17 +1,10 @@
 package com.delieat.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.delieat.constants.ApiUrls;
-import com.delieat.helpers.HttpHelper;
 import com.delieat.models.Restaurant;
 
 import org.json.JSONException;
@@ -26,27 +19,27 @@ public class RestaurantAddActivity extends AppCompatActivity {
     }
 
     public void createRestaurant(View view) {
-        String requestUrl = ApiUrls.ADD_RESTAURANT;
-        RequestQueue queue = HttpHelper.INSTANCE.getRequestQueue(getApplicationContext());
-        try {
-            JSONObject request = composeAddRestaurantRequest();
-            JsonObjectRequest createUserRequest = new JsonObjectRequest(Request.Method.POST, requestUrl, request,
-                    (response) -> {
-                        try {
-                            finish();
-                            startActivity(new Intent(this, LoginActivity.class));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    },
-                    (error) -> {
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-            );
-            queue.add(createUserRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String requestUrl = ApiUrls.ADD_RESTAURANT;
+//        RequestQueue queue = HttpHelper.INSTANCE.provideRequestQueue(getApplicationContext());
+//        try {
+//            JSONObject request = composeAddRestaurantRequest();
+//            JsonObjectRequest createUserRequest = new JsonObjectRequest(Request.Method.POST, requestUrl, request,
+//                    (response) -> {
+//                        try {
+//                            finish();
+//                            startActivity(new Intent(this, LoginActivity.class));
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    },
+//                    (error) -> {
+//                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//            );
+//            queue.add(createUserRequest);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private JSONObject composeAddRestaurantRequest() throws JSONException{
