@@ -3,7 +3,6 @@ package com.delieat.dagger;
 import android.content.Context;
 
 import com.delieat.DeliEatApp;
-import com.delieat.repositories.UserRepository;
 
 import javax.inject.Singleton;
 
@@ -13,9 +12,7 @@ import dagger.android.AndroidInjectionModule;
 
 @Module(includes = {
     AndroidInjectionModule.class,
-    ActivityModule.class,
-    RepositoryModule.class,
-    ViewModelModule.class })
+    ActivityModule.class })
 class DeliEatAppModule {
 
     @Provides

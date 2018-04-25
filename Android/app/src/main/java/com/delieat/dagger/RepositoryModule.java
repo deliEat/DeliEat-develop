@@ -10,10 +10,12 @@ import dagger.Provides;
 
 @Module(subcomponents = HttpComponent.class)
 public class RepositoryModule {
+
     @Provides
     @Singleton
     public static UserRepository provideUserRepository(
         HttpComponent.Builder httpComponentBuilder, SessionHelper sessionHelper) {
         return new UserRepository(httpComponentBuilder, sessionHelper);
     }
+
 }

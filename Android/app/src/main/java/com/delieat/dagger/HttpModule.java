@@ -14,4 +14,5 @@ public class HttpModule {
     static HttpHelper provideHttpHelper(Context appContext) {
         return new HttpHelper(appContext);
     }
+
 }
