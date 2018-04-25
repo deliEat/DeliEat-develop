@@ -1,40 +1,38 @@
 package com.delieat.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 
-import com.delieat.constants.UserSession;
 import com.delieat.constants.UserType;
+import com.delieat.helpers.SessionHelper;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPreferences session;
+    @Inject
+    SessionHelper sessionHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        redirectToLoginActivity(savedInstanceState);
 
-        session = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        if (isLoggedIn()) {
+        if (sessionHelper.isLoggedIn()) {
             redirectToHomeActivity(savedInstanceState);
         } else {
             redirectToLoginActivity(savedInstanceState);
         }
     }
 
-    private boolean isLoggedIn() {
-        return session.getInt(UserSession.USER_ID, Integer.MIN_VALUE) != Integer.MIN_VALUE;
-    }
-
     private void redirectToHomeActivity(Bundle savedInstanceState) {
-        String userType = session.getString(UserSession.USER_TYPE, null);
+        String userType = sessionHelper.getUserType();
         if (UserType.isCustomer(userType)) {
             finish();
             startActivity(new Intent(this, CustomerHomeActivity.class), savedInstanceState);

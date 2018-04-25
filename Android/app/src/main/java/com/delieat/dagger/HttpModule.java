@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class HttpModule {
+class HttpModule {
 
     @Provides
     static HttpHelper provideHttpHelper(Context appContext) {

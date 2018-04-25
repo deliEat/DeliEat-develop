@@ -12,7 +12,9 @@ import dagger.android.AndroidInjectionModule;
 
 @Module(includes = {
     AndroidInjectionModule.class,
-    ActivityModule.class })
+    ActivityModule.class,
+    SessionModule.class
+})
 class DeliEatAppModule {
 
     @Provides

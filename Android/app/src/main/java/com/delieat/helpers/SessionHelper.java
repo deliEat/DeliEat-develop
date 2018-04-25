@@ -12,12 +12,21 @@ import com.delieat.models.Owner;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+@Singleton
 public class SessionHelper {
     private final SharedPreferences session;
 
     @Inject
     public SessionHelper(Context appContext) {
         session = PreferenceManager.getDefaultSharedPreferences(appContext);
+    }
+
+    public String getUserType() {
+        return session.getString(UserSession.USER_TYPE, "");
+    }
+
+    public boolean isLoggedIn() {
+        return session.getInt(UserSession.USER_ID, 0) != 0;
     }
 
     public void startOwnerSession(Owner owner) {
