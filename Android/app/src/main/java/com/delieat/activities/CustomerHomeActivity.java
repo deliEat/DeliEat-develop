@@ -1,7 +1,9 @@
 package com.delieat.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -25,5 +27,10 @@ public class CustomerHomeActivity extends AppCompatActivity implements OnMapRead
         map.addMarker(new MarkerOptions()
             .position(new LatLng(0, 0))
             .title("Marker"));
+    }
+
+    public void displayRestaurantList(View view) {
+        finish();
+        startActivity(new Intent(this, RestaurantDisplayListActivity.class));
     }
 }

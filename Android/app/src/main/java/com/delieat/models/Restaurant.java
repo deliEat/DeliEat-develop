@@ -1,5 +1,7 @@
 package com.delieat.models;
 
+import android.arch.persistence.room.Entity;
+
 /**
  * Created by kayciwang on 2018-04-04.
  */
