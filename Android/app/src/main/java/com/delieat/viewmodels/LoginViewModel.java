@@ -10,7 +10,7 @@ import javax.inject.Singleton;
 
 @Singleton
 public class LoginViewModel extends ViewModel {
-    UserRepository userRepo;
+    private final UserRepository userRepo;
 
     @Inject
     public LoginViewModel(UserRepository userRepo) {
