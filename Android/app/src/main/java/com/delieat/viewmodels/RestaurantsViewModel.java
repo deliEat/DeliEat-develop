@@ -11,16 +11,21 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Singleton
+//@Singleton
 public class RestaurantsViewModel extends ViewModel {
-    RestaurantRepository restaurantRepo;
-
-    @Inject
-    public RestaurantsViewModel(RestaurantRepository resRepo) {
-        this.restaurantRepo = resRepo;
-    }
-
-    public LiveData<ArrayList<Restaurant>> getRestaurants() {
-        return restaurantRepo.getRestaurants();
-    }
+//    RestaurantRepository restaurantRepo;
+//    private MutableLiveData<ArrayList<Restaurant>> listOfRestaurants;
+//
+//    @Inject
+//    public RestaurantsViewModel(RestaurantRepository resRepo) {
+//        this.restaurantRepo = resRepo;
+//    }
+//
+//    public MutableLiveData<ArrayList<Restaurant>> getRestaurants() {
+//        if (listOfRestaurants == null) {
+//            listOfRestaurants = new MutableLiveData<>();
+//            listOfRestaurants = restaurantRepo.getRestaurants();
+//        }
+//        return listOfRestaurants;
+//    }
 }

@@ -23,13 +23,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, RestaurantDisplayListActivity.class));
 
-//        if (sessionHelper.isLoggedIn()) {
-//            redirectToHomeActivity(savedInstanceState);
-//        } else {
-//            redirectToLoginActivity(savedInstanceState);
-//        }
+        if (sessionHelper.isLoggedIn()) {
+            redirectToHomeActivity(savedInstanceState);
+        } else {
+            redirectToLoginActivity(savedInstanceState);
+        }
     }
 
     private void redirectToHomeActivity(Bundle savedInstanceState) {

@@ -19,11 +19,11 @@ class RepositoryModule {
         return new UserRepository(httpComponentBuilder, sessionHelper);
     }
 
-    @Provides
-    @Singleton
-    static RestaurantRepository provideRestaurantRepository(
-            HttpComponent.Builder httpComponentBuilder) {
-        return new RestaurantRepository(httpComponentBuilder);
-    }
+//    @Provides
+//    @Singleton
+//    static RestaurantRepository provideRestaurantRepository(
+//            HttpComponent.Builder httpComponentBuilder) {
+//        return new RestaurantRepository(httpComponentBuilder);
+//    }
 
 }

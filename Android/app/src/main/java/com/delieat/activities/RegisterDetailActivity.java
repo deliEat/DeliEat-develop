@@ -46,20 +46,20 @@ public class RegisterDetailActivity extends AppCompatActivity {
     }
 
     public void createUser(View view) {
-        UserType userType = (UserType) getIntent().getSerializableExtra(User.USER_TYPE);
-        String requestUrl = userType == UserType.OWNER ? ApiUrls.REGISTER_OWNER : ApiUrls.REGISTER_CUSTOMER;
-
-        httpHelper.sendJsonPostRequest(requestUrl, composeUserRegistrationRequest(userType),
-                (response) -> {
-                    try {
-                        finish();
-                        startActivity(new Intent(this, LoginActivity.class));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }, (error) -> {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                });
+//        UserType userType = (UserType) getIntent().getSerializableExtra(User.USER_TYPE);
+//        String requestUrl = userType == UserType.OWNER ? ApiUrls.REGISTER_OWNER : ApiUrls.REGISTER_CUSTOMER;
+//
+//        httpHelper.sendJsonPostRequest(requestUrl, composeUserRegistrationRequest(userType),
+//                (response) -> {
+//                    try {
+//                        finish();
+//                        startActivity(new Intent(this, LoginActivity.class));
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }, (error) -> {
+//                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+//                });
     }
 
     private JSONObject composeUserRegistrationRequest(UserType userType){
