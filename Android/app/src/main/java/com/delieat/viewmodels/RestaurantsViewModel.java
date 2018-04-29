@@ -4,19 +4,28 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import com.delieat.models.Restaurant;
-import java.util.List;
+import com.delieat.repositories.RestaurantRepository;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class RestaurantsViewModel extends ViewModel {
-    private MutableLiveData<List<Restaurant>> restaurants;
-    public LiveData<List<Restaurant>> getRestaurants() {
-        if (restaurants == null) {
-            restaurants = new MutableLiveData<List<Restaurant>>();
-            loadRestaurants();
-        }
-        return restaurants;
+    RestaurantRepository restaurantRepo;
+    private MutableLiveData<ArrayList<Restaurant>> listOfRestaurants;
+
+    @Inject
+    public RestaurantsViewModel(RestaurantRepository resRepo) {
+        this.restaurantRepo = resRepo;
     }
 
-    private void loadRestaurants() {
-        //TODO: get restaurant data from repository async calls
+    public MutableLiveData<ArrayList<Restaurant>> getRestaurants() {
+        if (listOfRestaurants == null) {
+            listOfRestaurants = new MutableLiveData<>();
+            listOfRestaurants = restaurantRepo.getRestaurants();
+        }
+        return listOfRestaurants;
     }
 }

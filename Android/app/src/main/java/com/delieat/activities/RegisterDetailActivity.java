@@ -1,13 +1,21 @@
 package com.delieat.activities;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.delieat.constants.ApiUrls;
 import com.delieat.constants.UserType;
+import com.delieat.helpers.Network.HttpHelper;
 import com.delieat.helpers.RegistrationHelper;
 import com.delieat.models.Customer;
 import com.delieat.models.Owner;
@@ -16,7 +24,15 @@ import com.delieat.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
+
 public class RegisterDetailActivity extends AppCompatActivity {
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    @Inject
+    HttpHelper httpHelper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +49,7 @@ public class RegisterDetailActivity extends AppCompatActivity {
 //        UserType userType = (UserType) getIntent().getSerializableExtra(User.USER_TYPE);
 //        String requestUrl = userType == UserType.OWNER ? ApiUrls.REGISTER_OWNER : ApiUrls.REGISTER_CUSTOMER;
 //
-//        RequestQueue queue = HttpHelper.INSTANCE.provideRequestQueue(getApplicationContext());
-//        try {
-//            JSONObject request = composeUserRegistrationRequest(userType);
-//            JsonObjectRequest createUserRequest = new JsonObjectRequest(Request.Method.POST, requestUrl, request,
+//        httpHelper.sendJsonPostRequest(requestUrl, composeUserRegistrationRequest(userType),
 //                (response) -> {
 //                    try {
 //                        finish();
@@ -44,36 +57,33 @@ public class RegisterDetailActivity extends AppCompatActivity {
 //                    } catch (Exception e) {
 //                        e.printStackTrace();
 //                    }
-//                },
-//                (error) -> {
+//                }, (error) -> {
 //                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            );
-//            queue.add(createUserRequest);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//                });
     }
 
-    private JSONObject composeUserRegistrationRequest(UserType userType) throws JSONException {
+    private JSONObject composeUserRegistrationRequest(UserType userType){
         SharedPreferences sharedPref = getSharedPreferences(RegistrationHelper.REGISTRATION_DATA, 0);
         String username = sharedPref.getString(User.USERNAME, "");
         String password = sharedPref.getString(User.PASSWORD, "");
 
         JSONObject user = new JSONObject();
-        user.put(User.USERNAME, username);
-        user.put(User.PASSWORD, password);
-        user.put(User.USER_TYPE, userType.getRepresentation());
-
         JSONObject request = new JSONObject();
-        request.put(User.USER, user);
+        try {
+            user.put(User.USERNAME, username);
+            user.put(User.PASSWORD, password);
+            user.put(User.USER_TYPE, userType.getRepresentation());
 
-        if (userType == UserType.OWNER) {
-            request.put(Owner.OWNER, composeOwnerDetailRequest());
-        } else {
-            request.put(Customer.CUSTOMER, composeCustomerDetailRequest());
+            request.put(User.USER, user);
+
+            if (userType == UserType.OWNER) {
+                request.put(Owner.OWNER, composeOwnerDetailRequest());
+            } else {
+                request.put(Customer.CUSTOMER, composeCustomerDetailRequest());
+            }
+        } catch(JSONException e) {
+
         }
-
         return request;
     }
 
