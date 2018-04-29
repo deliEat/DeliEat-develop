@@ -21,26 +21,26 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 
 public class RestaurantDisplayListActivity extends AppCompatActivity {
-//    @Inject
-//    ViewModelProvider.Factory viewModelFactory;
-//
-//    private RestaurantsViewModel rViewModel;
-//    private ArrayList<Restaurant> restaurantList = new ArrayList<>();
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        AndroidInjection.inject(this);
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_restaurant_display_list);
-//
-//        rViewModel = ViewModelProviders.of(this, viewModelFactory).get(RestaurantsViewModel.class);
-//
-//        ListView listView = (ListView) findViewById(R.id.restaurants);
-//
-//        rViewModel.getRestaurants().observe(this, restaurants -> {
-//            RestaurantsAdapter rAdapter = new RestaurantsAdapter(this, restaurantList);
-//            listView.setAdapter(rAdapter);
-//            restaurantList.addAll(restaurants);
-//        });
-//    }
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    private RestaurantsViewModel rViewModel;
+    private ArrayList<Restaurant> restaurantList = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restaurant_display_list);
+
+        rViewModel = ViewModelProviders.of(this, viewModelFactory).get(RestaurantsViewModel.class);
+
+        ListView listView = (ListView) findViewById(R.id.restaurants);
+
+        rViewModel.getRestaurants().observe(this, restaurants -> {
+            RestaurantsAdapter rAdapter = new RestaurantsAdapter(this, restaurantList);
+            listView.setAdapter(rAdapter);
+            restaurantList.addAll(restaurants);
+        });
+    }
 }

@@ -20,46 +20,46 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-//@Singleton
+@Singleton
 public class RestaurantRepository {
-//    private static final String LOG_TAG = RestaurantRepository.class.getSimpleName();
-//    private final HttpHelper httpHelper;
-//
-//    @Inject
-//    public RestaurantRepository(HttpComponent.Builder httpComponentBuilder) {
-//        this.httpHelper = httpComponentBuilder.build().httpHelper();
-//    }
-//
-//    public MutableLiveData<ArrayList<Restaurant>> getRestaurants() {
-//        final MutableLiveData<ArrayList<Restaurant>> restaurantResponse = new MutableLiveData<>();
-//        httpHelper.sendJSONGetIndexRequest(ApiUrls.GET_RESTAURANTS, null,
-//                response -> {
-//                    try {
-//                        ArrayList<Restaurant> listOfRestaurants = new ArrayList<>();
-//                        parseRestaurants(response, listOfRestaurants);
-//                        restaurantResponse.setValue(listOfRestaurants);
-//                    } catch (Exception e) {
-//                        Log.e(LOG_TAG, "Failed to parse restaurant JSONArray response", e);
-//                    }
-//                },
-//                error -> {
-//                    Log.e(LOG_TAG, "Failed to get restaurants.", error);
-//                }
-//        );
-//        return restaurantResponse;
-//    }
-//
-//    private void parseRestaurants(JSONArray restaurantJSONList, List<Restaurant> restaurantList) throws JSONException {
-//        for (int i = 0; i < restaurantJSONList.length(); i++) {
-//            addSingleRestaurant(restaurantJSONList.getJSONObject(i), restaurantList);
-//        }
-//    }
-//
-//    private void addSingleRestaurant(JSONObject restaurant, List<Restaurant> restaurantList) throws JSONException{
-//        Restaurant newRestaurantObject = new Restaurant();
-//        newRestaurantObject.setOwner_id(restaurant.getInt("owner_id"));
-//        newRestaurantObject.setName(restaurant.getString("name"));
-//        newRestaurantObject.setEstimated_cook_time(restaurant.getString("estimated_cook_time"));
-//        restaurantList.add(newRestaurantObject);
-//    }
+    private static final String LOG_TAG = RestaurantRepository.class.getSimpleName();
+    private final HttpHelper httpHelper;
+
+    @Inject
+    public RestaurantRepository(HttpComponent.Builder httpComponentBuilder) {
+        this.httpHelper = httpComponentBuilder.build().httpHelper();
+    }
+
+    public MutableLiveData<ArrayList<Restaurant>> getRestaurants() {
+        final MutableLiveData<ArrayList<Restaurant>> restaurantResponse = new MutableLiveData<>();
+        httpHelper.sendJSONGetIndexRequest(ApiUrls.GET_RESTAURANTS, null,
+                response -> {
+                    try {
+                        ArrayList<Restaurant> listOfRestaurants = new ArrayList<>();
+                        parseRestaurants(response, listOfRestaurants);
+                        restaurantResponse.setValue(listOfRestaurants);
+                    } catch (Exception e) {
+                        Log.e(LOG_TAG, "Failed to parse restaurant JSONArray response", e);
+                    }
+                },
+                error -> {
+                    Log.e(LOG_TAG, "Failed to get restaurants.", error);
+                }
+        );
+        return restaurantResponse;
+    }
+
+    private void parseRestaurants(JSONArray restaurantJSONList, List<Restaurant> restaurantList) throws JSONException {
+        for (int i = 0; i < restaurantJSONList.length(); i++) {
+            addSingleRestaurant(restaurantJSONList.getJSONObject(i), restaurantList);
+        }
+    }
+
+    private void addSingleRestaurant(JSONObject restaurant, List<Restaurant> restaurantList) throws JSONException{
+        Restaurant newRestaurantObject = new Restaurant();
+        newRestaurantObject.setOwner_id(restaurant.getInt("owner_id"));
+        newRestaurantObject.setName(restaurant.getString("name"));
+        newRestaurantObject.setEstimated_cook_time(restaurant.getString("estimated_cook_time"));
+        restaurantList.add(newRestaurantObject);
+    }
 }

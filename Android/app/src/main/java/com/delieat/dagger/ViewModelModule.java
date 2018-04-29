@@ -20,10 +20,10 @@ abstract class ViewModelModule {
     @ViewModelKey(LoginViewModel.class)
     abstract ViewModel loginViewModel(LoginViewModel loginViewModel);
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(RestaurantsViewModel.class)
-//    abstract ViewModel restaurantsViewModel(RestaurantsViewModel restaurantsViewModel);
+    @Binds
+    @IntoMap
+    @ViewModelKey(RestaurantsViewModel.class)
+    abstract ViewModel restaurantsViewModel(RestaurantsViewModel restaurantsViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory viewModelFactory(ViewModelFactory viewModelFactory);
