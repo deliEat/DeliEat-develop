@@ -26,7 +26,7 @@ public class SessionHelper {
     }
 
     public boolean isLoggedIn() {
-        return Integer.parseInt(session.getString(UserSession.USER_ID, "0")) != 0;
+        return session.getString(UserSession.USER_ID, null) != null;
     }
 
     public void startOwnerSession(Owner owner) {

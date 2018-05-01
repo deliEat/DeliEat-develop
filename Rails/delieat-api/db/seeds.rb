@@ -60,5 +60,3 @@ p "Created #{ Restaurant.count } restaurants."
     )
 end
 p "Created #{ Customer.count } customers."
-
-# Seed restaurant
