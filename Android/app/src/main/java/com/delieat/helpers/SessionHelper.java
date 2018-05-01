@@ -29,6 +29,11 @@ public class SessionHelper {
         return session.getInt(UserSession.USER_ID, Integer.MIN_VALUE) != Integer.MIN_VALUE;
     }
 
+    public void endSession() {
+        SharedPreferences.Editor editor = session.edit();
+        editor.clear().apply();
+    }
+
     public void startOwnerSession(Owner owner) {
         SharedPreferences.Editor editor = session.edit();
         editor.putInt(UserSession.USER_ID, owner.getUser_id())

@@ -5,6 +5,7 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="add_restaurant">Add Restaurant</string>
     <string name="login_fail_msg">Login failed!</string>
     <string name="passwords_do_not_match">Passwords do not match!</string>
