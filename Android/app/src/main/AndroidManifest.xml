@@ -3,6 +3,7 @@
     package="com.delieat.activities">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="com.delieat.DeliEatApp"
@@ -26,8 +27,11 @@
         <activity android:name=".RestaurantAddActivity" />
         <activity android:name=".RestaurantDisplayListActivity" />
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA9u_SB7Bw_Iwqz1AWlymUqcX1GriAlwUs" />
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyD64EKxI30HEciSE6owBvpFtZkcFhMPkK4" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
