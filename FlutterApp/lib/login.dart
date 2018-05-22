@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'theme/colors.dart';
 import 'register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,16 +12,24 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new SafeArea(
-        child: new ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          children: <Widget>[
-            const SizedBox(height: 70.0),
-            new _Icon(),
-            const SizedBox(height: 70.0),
-            new _LoginFields(),
-            const SizedBox(height: 70.0),
-            new _LoginButtons()
-          ],
+        child: new DecoratedBox(
+          child: new ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            children: <Widget>[
+              const SizedBox(height: 70.0),
+              new _Icon(),
+              const SizedBox(height: 70.0),
+              new _LoginFields(),
+              const SizedBox(height: 70.0),
+              new _LoginButtons()
+            ],
+          ),
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/background.jpg'),
+              fit: BoxFit.fill
+            )
+          )
         ),
       ),
     );
@@ -39,6 +47,8 @@ class _Icon extends StatelessWidget {
         const SizedBox(height: 16.0),
         const Text('DeliEat',
           style: const TextStyle(fontSize: 20.0)),
+        const Text('Deli, Delicious, Delivery Eat',
+          style: const TextStyle(fontSize: 15.0)),
       ],
     );
   }
@@ -95,6 +105,7 @@ class _LoginButtonsState extends State<_LoginButtons> {
           child: new RaisedButton(
             child: Text('LOGIN'),
             elevation: 5.0,
+            textColor: deliEatBackgroundWhite,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
             ),

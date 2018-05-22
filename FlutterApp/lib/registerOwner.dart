@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'theme/colors.dart';
-import 'registerCustomer.dart';
-import 'registerOwner.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterOwnerPage extends StatefulWidget {
   @override
-  _RegisterPageState createState() => new _RegisterPageState();
+  _RegisterOwnerPageState createState() => new _RegisterOwnerPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterOwnerPageState extends State<RegisterOwnerPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -38,7 +35,7 @@ class _Icon extends StatelessWidget {
           height: 70.0,
           width: 70.0),
         const SizedBox(height: 16.0),
-        const Text('DeliEat',
+        const Text('Restaurant Owner Registration',
           style: const TextStyle(fontSize: 20.0)),
       ],
     );
@@ -57,7 +54,7 @@ class _RegisterFieldsState extends State<_RegisterFields> {
       children: <Widget> [
         TextField(
           decoration: InputDecoration(
-            labelText: 'Username',
+            labelText: 'Full Name',
           ),
         ),
         // spacer
@@ -65,7 +62,7 @@ class _RegisterFieldsState extends State<_RegisterFields> {
         // [Password]
         TextField(
           decoration: InputDecoration(
-            labelText: 'Password',
+            labelText: 'Email',
           ),
           obscureText: true,
         ),
@@ -73,7 +70,7 @@ class _RegisterFieldsState extends State<_RegisterFields> {
         SizedBox(height: 12.0),
         TextField(
           decoration: InputDecoration(
-            labelText: 'Confirm Password',
+            labelText: 'Address',
           ),
           obscureText: true,
         ),
@@ -96,34 +93,13 @@ class _RegisterButtonsState extends State<_RegisterButtons> {
         new Container (
           margin: const EdgeInsets.all(5.0),
           child: new RaisedButton(
-            child: Text('Register as Customer'),
-            textColor: deliEatBackgroundWhite,
+            child: Text('Register'),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
             ),
             elevation: 5.0,
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterCustomerPage()),
-              );
-            }
-          )
-        ),
-        new Container(
-          margin: const EdgeInsets.all(5.0),
-          child: new RaisedButton(
-            child: new Text('Register as Restaurant Owner'),
-            textColor: deliEatBackgroundWhite,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-            ),
-            elevation: 5.0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterOwnerPage()),
-              );
+              // TODO: Register
             }
           )
         )
