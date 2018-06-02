@@ -26,7 +26,9 @@ class AccountServiceController < ApplicationController
 
     def login
         @user = User.find_by(username: params[:username], password: params[:password])
-        if @user.user_type == 'customer'
+        if !@user
+            render plain: 'false'
+        elsif @user.user_type == 'customer'
             @customer = Customer.find_by(user_id: @user.id)
             response = {
                 'user_type' => 'customer',

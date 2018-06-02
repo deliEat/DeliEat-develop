@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'theme/colors.dart';
 import 'register.dart';
+import 'services/account.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,9 +20,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 70.0),
               new _Icon(),
               const SizedBox(height: 70.0),
-              new _LoginFields(),
-              const SizedBox(height: 70.0),
-              new _LoginButtons()
+              new _LoginForm(),
+//              const SizedBox(height: 70.0),
+//              new _LoginButtons()
             ],
           ),
           decoration: new BoxDecoration(
@@ -54,81 +55,168 @@ class _Icon extends StatelessWidget {
   }
 }
 
-class _LoginFields extends StatefulWidget {
+class _LoginForm extends StatefulWidget {
   @override
-  _LoginFieldsState createState() => new _LoginFieldsState();
+  _LoginFormState createState() => new _LoginFormState();
 }
 
-class _LoginFieldsState extends State<_LoginFields> {
+class _LoginFormState extends State<_LoginForm> {
+
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+  final _usernameController = new TextEditingController();
+  final _passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context){
-    return new Column(
-      children: <Widget> [
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Username',
-            prefixIcon: new Icon(
-              const IconData(0xe7fd, fontFamily: 'MaterialIcons')
+    return new Form(
+      key: _formKey,
+      child: new Column(
+        children: <Widget> [
+          TextFormField(
+            controller: _usernameController,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Username is required';
+              }
+            },
+            decoration: InputDecoration(
+              labelText: 'Username',
+              prefixIcon: new Icon(
+                const IconData(0xe7fd, fontFamily: 'MaterialIcons')
+              ),
             ),
           ),
-        ),
-// spacer
-        SizedBox(height: 12.0),
-// [Password]
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Password',
-            prefixIcon: new Icon(
-              const IconData(0xe897, fontFamily: 'MaterialIcons')
-            )
+          SizedBox(height: 12.0),
+          TextFormField(
+            controller: _passwordController,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Password is required';
+              }
+            },
+            decoration: InputDecoration(
+              labelText: 'Password',
+              prefixIcon: new Icon(
+                const IconData(0xe897, fontFamily: 'MaterialIcons')
+              )
+            ),
+            obscureText: true,
           ),
-          obscureText: true,
-        ),
-      ],
+          new Container (
+              margin: const EdgeInsets.all(5.0),
+              child: new RaisedButton(
+                  child: Text('LOGIN'),
+                  elevation: 5.0,
+                  textColor: deliEatBackgroundWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      login(
+                        _usernameController.text,
+                        _passwordController.text,
+                      );
+                    }
+                  }
+              )
+          ),
+          new Container(
+              margin: const EdgeInsets.all(10.0),
+              child: new InkWell(
+                  child: new Center(
+                    child: new Text('Register'),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(builder: (context) => new RegisterPage()),
+                    );
+                  }
+              )
+          )
+        ],
+      )
     );
+
+//    return new Column(
+//      children: <Widget> [
+//        TextField(
+//          controller: usernameController,
+//          decoration: InputDecoration(
+//            labelText: 'Username',
+//            prefixIcon: new Icon(
+//              const IconData(0xe7fd, fontFamily: 'MaterialIcons')
+//            ),
+//          ),
+//        ),
+//        SizedBox(height: 12.0),
+//        TextField(
+//          controller: passwordController,
+//          decoration: InputDecoration(
+//            labelText: 'Password',
+//            prefixIcon: new Icon(
+//              const IconData(0xe897, fontFamily: 'MaterialIcons')
+//            )
+//          ),
+//          obscureText: true,
+//        ),
+//      ],
+//    );
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
 
-class _LoginButtons extends StatefulWidget {
-  @override
-  _LoginButtonsState createState() => new _LoginButtonsState();
-}
+//class _LoginButtons extends StatefulWidget {
+//  @override
+//  _LoginButtonsState createState() => new _LoginButtonsState();
+//}
 
-class _LoginButtonsState extends State<_LoginButtons> {
-  @override
-  Widget build(BuildContext context) {
-    return new Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        new Container (
-          margin: const EdgeInsets.all(5.0),
-          child: new RaisedButton(
-            child: Text('LOGIN'),
-            elevation: 5.0,
-            textColor: deliEatBackgroundWhite,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-            ),
-            onPressed: () {
-              // TODO: Login
-            }
-          )
-        ),
-        new Container(
-          margin: const EdgeInsets.all(10.0),
-          child: new InkWell(
-            child: new Center(
-              child: new Text('Register'),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterPage()),
-              );
-            }
-          )
-        )
-      ],
-    );
-  }
-}
+//class _LoginButtonsState extends State<_LoginButtons> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return new Column(
+//      crossAxisAlignment: CrossAxisAlignment.stretch,
+//      children: <Widget>[
+//        new Container (
+//          margin: const EdgeInsets.all(5.0),
+//          child: new RaisedButton(
+//            child: Text('LOGIN'),
+//            elevation: 5.0,
+//            textColor: deliEatBackgroundWhite,
+//            shape: RoundedRectangleBorder(
+//              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+//            ),
+//            onPressed: () {
+//              // TODO: Login
+//              login(new LoginRequest(
+//                username: usernameController.text,
+//                password: passowordController.text));
+//            }
+//          )
+//        ),
+//        new Container(
+//          margin: const EdgeInsets.all(10.0),
+//          child: new InkWell(
+//            child: new Center(
+//              child: new Text('Register'),
+//            ),
+//            onTap: () {
+//              Navigator.push(
+//                context,
+//                new MaterialPageRoute(builder: (context) => new RegisterPage()),
+//              );
+//            }
+//          )
+//        )
+//      ],
+//    );
+//  }
+//}
