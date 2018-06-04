@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 70.0),
                 new _Icon(),
                 const SizedBox(height: 70.0),
-                new _LoginForm(),
+                new _LoginForm()
               ],
             ),
             decoration: new BoxDecoration(
@@ -96,82 +96,61 @@ class _LoginFormState extends State<_LoginForm> {
                       const IconData(0xe897, fontFamily: 'MaterialIcons'))),
               obscureText: true,
             ),
-            new Container(
-              margin: const EdgeInsets.all(5.0),
-              child: new RaisedButton(
-                  child: Text('LOGIN'),
-                  elevation: 5.0,
-                  textColor: deliEatBackgroundWhite,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Future<User> user = login(
-                        _usernameController.text,
-                        _passwordController.text,
-                      );
-                      user.then((user) {
-                        if (user.type == 'customer') {
+            new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                new Container(
+                    margin: const EdgeInsets.all(10.0),
+                    child: new RaisedButton(
+                        child: Text('LOGIN'),
+                        elevation: 5.0,
+                        textColor: deliEatBackgroundWhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            Future<User> user = login(
+                              _usernameController.text,
+                              _passwordController.text,
+                            );
+                            user.then((user) {
+                              if (user.type == 'customer') {
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) =>
+                                          new CustomerHomePage()),
+                                );
+                              } else if (user.type == 'owner') {
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) =>
+                                          new OwnerHomePage()),
+                                );
+                              }
+                              // TODO: Add error handling
+                            });
+                          }
+                        })),
+                new Container(
+                    margin: const EdgeInsets.all(10.0),
+                    child: new InkWell(
+                        child: new Center(
+                          child: new Text('Register'),
+                        ),
+                        onTap: () {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new CustomerHomePage()),
+                                builder: (context) => new RegisterPage()),
                           );
-                        } else if (user.type == 'owner') {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                                builder: (context) => new OwnerHomePage()),
-                          );
-                        }
-                        // TODO: Add error handling
-                      });
-                    }
-                  }),
+                        }))
+              ],
             ),
-//          new Container(
-//                  margin: const EdgeInsets.all(10.0),
-//                  child: new InkWell(
-//                  child: new Center(
-//                    child: new Text('Register'),
-//                  ),
-//                  onTap
-//                }: () {
-//                    Navigator.push(
-//                      context,
-//                      new MaterialPageRoute(builder: (context) => new RegisterPage()),
-//                    );
-//                  }
-//              )
-//          )
           ],
         ));
-
-//    return new Column(
-//      children: <Widget> [
-//        TextField(
-//          controller: usernameController,
-//          decoration: InputDecoration(
-//            labelText: 'Username',
-//            prefixIcon: new Icon(
-//              const IconData(0xe7fd, fontFamily: 'MaterialIcons')
-//            ),
-//          ),
-//        ),
-//        SizedBox(height: 12.0),
-//        TextField(
-//          controller: passwordController,
-//          decoration: InputDecoration(
-//            labelText: 'Password',
-//            prefixIcon: new Icon(
-//              const IconData(0xe897, fontFamily: 'MaterialIcons')
-//            )
-//          ),
-//          obscureText: true,
-//        ),
-//      ],
-//    );
   }
 
   @override
@@ -181,50 +160,3 @@ class _LoginFormState extends State<_LoginForm> {
     super.dispose();
   }
 }
-
-//class _LoginButtons extends StatefulWidget {
-//  @override
-//  _LoginButtonsState createState() => new _LoginButtonsState();
-//}
-
-//class _LoginButtonsState extends State<_LoginButtons> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new Column(
-//      crossAxisAlignment: CrossAxisAlignment.stretch,
-//      children: <Widget>[
-//        new Container (
-//          margin: const EdgeInsets.all(5.0),
-//          child: new RaisedButton(
-//            child: Text('LOGIN'),
-//            elevation: 5.0,
-//            textColor: deliEatBackgroundWhite,
-//            shape: RoundedRectangleBorder(
-//              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-//            ),
-//            onPressed: () {
-//              // TODO: Login
-//              login(new LoginRequest(
-//                username: usernameController.text,
-//                password: passowordController.text));
-//            }
-//          )
-//        ),
-//        new Container(
-//          margin: const EdgeInsets.all(10.0),
-//          child: new InkWell(
-//            child: new Center(
-//              child: new Text('Register'),
-//            ),
-//            onTap: () {
-//              Navigator.push(
-//                context,
-//                new MaterialPageRoute(builder: (context) => new RegisterPage()),
-//              );
-//            }
-//          )
-//        )
-//      ],
-//    );
-//  }
-//}

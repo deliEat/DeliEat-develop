@@ -1,3 +1,4 @@
+import 'package:DeliEat/screens/restaurantListView.dart';
 import 'package:flutter/material.dart';
 
 class CustomerHomePage extends StatelessWidget {
@@ -8,12 +9,22 @@ class CustomerHomePage extends StatelessWidget {
         title: new Text("Customer Home"),
       ),
       body: new Center(
-        child: new RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: new Text('Go back to Login!'),
-        ),
+        child: new Column(children: <Widget>[
+          new RaisedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: new Text('Go back to Login!'),
+          ),
+          new RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new RestaurantListView()));
+              },
+              child: new Text('Go to Restaurant List View'))
+        ]),
       ),
     );
   }
