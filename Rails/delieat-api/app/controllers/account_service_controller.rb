@@ -1,3 +1,5 @@
+require "ostruct"
+
 class AccountServiceController < ApplicationController
     # disable CSRF until a token authentication is implemented
     skip_before_action :verify_authenticity_token
@@ -30,18 +32,14 @@ class AccountServiceController < ApplicationController
             render plain: 'false'
         elsif @user.user_type == 'customer'
             @customer = Customer.find_by(user_id: @user.id)
-            response = {
-                'user_type' => 'customer',
-                'customer' => @customer
-            }
-            render :json => response
+            response = OpenStruct.new(@customer.attributes)
+            response.user_type = 'customer'
+            render :json => response.to_h
         elsif @user.user_type == "owner"
             @owner = Owner.find_by(user_id: @user.id)
-            response = {
-                'user_type' => 'owner',
-                'owner' => @owner
-            }
-            render :json => response
+            response = OpenStruct.new(@owner.attributes)
+            response.user_type = 'owner'
+            render :json => response.to_h
         else
             render plain: 'false'
         end

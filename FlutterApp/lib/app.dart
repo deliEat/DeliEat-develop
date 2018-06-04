@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'theme/colors.dart';
 
-import 'login.dart';
+import 'package:DeliEat/screens/login.dart';
 
 ThemeData _buildDeliEatTheme() {
   final ThemeData base = ThemeData.light();
