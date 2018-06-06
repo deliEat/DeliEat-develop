@@ -1,7 +1,7 @@
+import 'package:DeliEat/screens/registerCustomer.dart';
+import 'package:DeliEat/screens/registerOwner.dart';
+import 'package:DeliEat/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'theme/colors.dart';
-import 'registerCustomer.dart';
-import 'registerOwner.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -34,12 +34,9 @@ class _Icon extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
-        new Image.asset('assets/hotpot.png',
-          height: 70.0,
-          width: 70.0),
+        new Image.asset('assets/hotpot.png', height: 70.0, width: 70.0),
         const SizedBox(height: 16.0),
-        const Text('DeliEat',
-          style: const TextStyle(fontSize: 20.0)),
+        const Text('DeliEat', style: const TextStyle(fontSize: 20.0)),
       ],
     );
   }
@@ -52,9 +49,9 @@ class _RegisterFields extends StatefulWidget {
 
 class _RegisterFieldsState extends State<_RegisterFields> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return new Column(
-      children: <Widget> [
+      children: <Widget>[
         TextField(
           decoration: InputDecoration(
             labelText: 'Username',
@@ -93,40 +90,38 @@ class _RegisterButtonsState extends State<_RegisterButtons> {
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        new Container (
-          margin: const EdgeInsets.all(5.0),
-          child: new RaisedButton(
-            child: Text('Register as Customer'),
-            textColor: deliEatBackgroundWhite,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-            ),
-            elevation: 5.0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterCustomerPage()),
-              );
-            }
-          )
-        ),
         new Container(
-          margin: const EdgeInsets.all(5.0),
-          child: new RaisedButton(
-            child: new Text('Register as Restaurant Owner'),
-            textColor: deliEatBackgroundWhite,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-            ),
-            elevation: 5.0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterOwnerPage()),
-              );
-            }
-          )
-        )
+            margin: const EdgeInsets.all(5.0),
+            child: new RaisedButton(
+                child: Text('Register as Customer'),
+                textColor: deliEatBackgroundWhite,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                ),
+                elevation: 5.0,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new RegisterCustomerPage()),
+                  );
+                })),
+        new Container(
+            margin: const EdgeInsets.all(5.0),
+            child: new RaisedButton(
+                child: new Text('Register as Restaurant Owner'),
+                textColor: deliEatBackgroundWhite,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                ),
+                elevation: 5.0,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new RegisterOwnerPage()),
+                  );
+                }))
       ],
     );
   }

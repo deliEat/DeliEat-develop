@@ -5,7 +5,7 @@ import 'package:DeliEat/screens/customerHome.dart';
 import 'package:DeliEat/screens/ownerHome.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
-import '../register.dart';
+import 'package:DeliEat/screens/register.dart';
 import '../services/account.dart';
 
 class LoginPage extends StatefulWidget {
