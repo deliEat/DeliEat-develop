@@ -1,9 +1,7 @@
+import 'package:DeliEat/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'theme/colors.dart';
 
-import 'package:DeliEat/screens/login.dart';
-
-ThemeData _buildDeliEatTheme() {
+ThemeData buildDeliEatTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     accentColor: deliEatSecondaryRed,
@@ -17,7 +15,7 @@ ThemeData _buildDeliEatTheme() {
       ),
     ),
     textTheme: _buildDeliEatTextTheme(
-      base.textTheme
+      base.textTheme,
     ),
     //TODO: Add the icon themes (103)
     //TODO: Decorate the inputs (103)
@@ -29,27 +27,15 @@ TextTheme _buildDeliEatTextTheme(TextTheme base) {
     headline: base.headline.copyWith(
       fontWeight: FontWeight.w500,
     ),
-    title: base.title.copyWith(
-      fontSize: 18.0
-    ),
+    title: base.title.copyWith(fontSize: 18.0),
     caption: base.caption.copyWith(
       fontWeight: FontWeight.w400,
       fontSize: 14.0,
     ),
-  ).apply(
+  )
+  .apply(
     fontFamily: 'OpenSans',
     displayColor: deliEatBlack,
     bodyColor: deliEatBlack,
   );
-}
-
-class DeliEatApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DeliEat',
-      theme: _buildDeliEatTheme(),
-      home: new LoginPage()
-    );
-  }
 }

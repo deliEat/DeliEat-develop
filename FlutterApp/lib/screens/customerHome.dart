@@ -1,4 +1,4 @@
-import 'package:DeliEat/screens/restaurantListView.dart';
+import 'package:DeliEat/views/restaurantListView.dart';
 import 'package:flutter/material.dart';
 
 class CustomerHomePage extends StatelessWidget {

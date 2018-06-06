@@ -39,7 +39,8 @@ class _RestaurantMenuBarState extends State<_RestaurantMenuBar> {
           decoration: InputDecoration(
             hintText: 'Search',
             prefixIcon: new Icon(
-              const IconData(0xe8b6, fontFamily: 'MaterialIcons')),
+              const IconData(0xe8b6, fontFamily: 'MaterialIcons'),
+            ),
           ),
         )
       ]
