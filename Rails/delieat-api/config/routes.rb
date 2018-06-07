@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'register-owner', to: 'account_service#register_owner'
   post 'register-customer', to: 'account_service#register_customer'
 
-  post 'add-restaurants', to: 'restaurants#create'
-  get 'restaurants', to: 'restaurants#index'
+  get 'restaurants/all', to: 'restaurant_service#index'
+  get 'restaurants/owner/:owner_id', to: 'restaurant_service#of_owner'
+  post 'add-restaurants', to: 'restaurant_service#create'
 end

@@ -1,3 +1,5 @@
+import 'package:DeliEat/models/restaurant.dart';
+import 'package:DeliEat/services/restaurant.dart';
 import 'package:DeliEat/views/restaurantListView.dart';
 import 'package:flutter/material.dart';
 
@@ -6,25 +8,29 @@ class CustomerHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Customer Home"),
+        title: new Text("Home"),
       ),
-      body: new Center(
-        child: new Column(children: <Widget>[
-          new RaisedButton(
-            onPressed: () {
-              Navigator.pop(context);
+      body: new Column(
+        children: <Widget>[
+          new FutureBuilder(
+            // TODO: get owner_id from logged in user
+            future: getRestaurants(),
+            builder: (
+                BuildContext context,
+                AsyncSnapshot<List<Restaurant>> restaurantsResponse,
+                ) {
+              if (!restaurantsResponse.hasData) {
+                return new Center(
+                  child: new CircularProgressIndicator(),
+                );
+              }
+              List<Restaurant> restaurants = restaurantsResponse.data;
+              return new Expanded(
+                child: new RestaurantListView(restaurants: restaurants),
+              );
             },
-            child: new Text('Go back to Login!'),
           ),
-          new RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new RestaurantListView()));
-              },
-              child: new Text('Go to Restaurant List View'))
-        ]),
+        ],
       ),
     );
   }

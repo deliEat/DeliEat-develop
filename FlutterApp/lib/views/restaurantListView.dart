@@ -1,9 +1,11 @@
 import 'package:DeliEat/models/restaurant.dart';
-import 'package:DeliEat/services/restaurants.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 
 class RestaurantListView extends StatefulWidget {
+  final List<Restaurant> restaurants;
+
+  RestaurantListView({this.restaurants});
+
   @override
   _RestaurantListViewState createState() => new _RestaurantListViewState();
 }
@@ -11,16 +13,11 @@ class RestaurantListView extends StatefulWidget {
 class _RestaurantListViewState extends State<RestaurantListView> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("List of Restaurants"),
-      ),
-      body: new Column(
-        children: <Widget>[
-          new _RestaurantMenuBar(),
-          new _RestaurantListItems(),
-        ],
-      ),
+    return new Column(
+      children: <Widget>[
+        new _RestaurantMenuBar(),
+        new _RestaurantListItems(widget.restaurants),
+      ],
     );
   }
 }
@@ -35,18 +32,23 @@ class _RestaurantMenuBarState extends State<_RestaurantMenuBar> {
   Widget build(BuildContext context) {
     return new Container(
       child: TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Search',
-            prefixIcon: new Icon(
-              const IconData(0xe8b6, fontFamily: 'MaterialIcons'),
-            ),
+        decoration: InputDecoration(
+          hintText: 'Search',
+          prefixIcon: new Icon(
+            const IconData(0xe8b6, fontFamily: 'MaterialIcons'),
           ),
         ),
+      ),
     );
   }
 }
 
 class _RestaurantListItems extends StatefulWidget {
+  final List<Restaurant> restaurants;
+
+  _RestaurantListItems(List<Restaurant> restaurants)
+      : restaurants = restaurants;
+
   @override
   _RestaurantListItemsState createState() => new _RestaurantListItemsState();
 }
@@ -54,29 +56,22 @@ class _RestaurantListItems extends StatefulWidget {
 class _RestaurantListItemsState extends State<_RestaurantListItems> {
   @override
   Widget build(BuildContext context) {
-    return new FutureBuilder(
-      future: getRestaurants(),
-      builder: (BuildContext context, AsyncSnapshot<List> restaurants) {
-        if (!restaurants.hasData) {
-          return new Center(
-            child: new CircularProgressIndicator(),
-          );
-        }
-        List retrievedData = restaurants.data;
-        List<Widget> displayRestaurants = new List();
-        for (final restaurant in retrievedData) {
-          displayRestaurants.add(_buildRow(restaurant));
-        }
-        return new Expanded(
-          child: ListView(
-            children: displayRestaurants,
-          )
-        );
-      },
+    return new Expanded(
+      child: ListView(
+        children: _buildRestaurantRows(widget.restaurants),
+      ),
     );
   }
 
-  Widget _buildRow(Restaurant restaurant) {
+  List<Widget> _buildRestaurantRows(List<Restaurant> restaurants) {
+    List<Widget> restaurantRows = new List();
+    restaurants.forEach((restaurant) {
+      restaurantRows.add(_buildRestaurantRow(restaurant));
+    });
+    return restaurantRows;
+  }
+
+  Widget _buildRestaurantRow(Restaurant restaurant) {
     return new ListTile(
       leading: const Icon(Icons.event_seat),
       title: Text(restaurant.name),

@@ -13,9 +13,7 @@ Restaurant _$RestaurantFromJson(Map<String, dynamic> json) {
 
 abstract class _$RestaurantSerializerMixin {
   String get name;
-  int get estimated_cook_time;
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'name': name,
-        'estimated_cook_time': estimated_cook_time
-      };
+  int get estimatedCookTime;
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'name': name, 'estimated_cook_time': estimatedCookTime};
 }
