@@ -4,6 +4,10 @@ import 'package:DeliEat/views/restaurantListView.dart';
 import 'package:flutter/material.dart';
 
 class OwnerHomePage extends StatelessWidget {
+  final int ownerId;
+
+  OwnerHomePage({@required this.ownerId});
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -13,8 +17,7 @@ class OwnerHomePage extends StatelessWidget {
       body: new Column(
         children: <Widget>[
           new FutureBuilder(
-            // TODO: get owner_id from logged in user
-            future: getOwnerRestaurants('29'),
+            future: getOwnerRestaurants(ownerId),
             builder: (
               BuildContext context,
               AsyncSnapshot<List<Restaurant>> restaurantsResponse,

@@ -91,37 +91,43 @@ class _RegisterButtonsState extends State<_RegisterButtons> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         new Container(
-            margin: const EdgeInsets.all(5.0),
-            child: new RaisedButton(
-                child: Text('Register as Customer'),
-                textColor: deliEatBackgroundWhite,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          margin: const EdgeInsets.all(5.0),
+          child: new RaisedButton(
+            child: Text('Register as Customer'),
+            textColor: deliEatBackgroundWhite,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            ),
+            elevation: 5.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => new RegisterCustomerPage(),
                 ),
-                elevation: 5.0,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new RegisterCustomerPage()),
-                  );
-                })),
+              );
+            },
+          ),
+        ),
         new Container(
-            margin: const EdgeInsets.all(5.0),
-            child: new RaisedButton(
-                child: new Text('Register as Restaurant Owner'),
-                textColor: deliEatBackgroundWhite,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          margin: const EdgeInsets.all(5.0),
+          child: new RaisedButton(
+            child: new Text('Register as Restaurant Owner'),
+            textColor: deliEatBackgroundWhite,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            ),
+            elevation: 5.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => new RegisterOwnerPage(),
                 ),
-                elevation: 5.0,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new RegisterOwnerPage()),
-                  );
-                }))
+              );
+            },
+          ),
+        ),
       ],
     );
   }

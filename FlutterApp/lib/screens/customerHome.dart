@@ -13,7 +13,6 @@ class CustomerHomePage extends StatelessWidget {
       body: new Column(
         children: <Widget>[
           new FutureBuilder(
-            // TODO: get owner_id from logged in user
             future: getRestaurants(),
             builder: (
                 BuildContext context,

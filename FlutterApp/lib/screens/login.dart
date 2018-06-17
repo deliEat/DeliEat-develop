@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:DeliEat/models/user.dart';
 import 'package:DeliEat/screens/customerHome.dart';
 import 'package:DeliEat/screens/ownerHome.dart';
-import 'package:flutter/material.dart';
-import '../theme/colors.dart';
 import 'package:DeliEat/screens/register.dart';
+import 'package:flutter/material.dart';
 import '../services/account.dart';
+import '../theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -123,17 +123,21 @@ class _LoginFormState extends State<_LoginForm> {
                         _passwordController.text,
                       );
                       user.then((user) {
+                        startUserSession(user);
                         if (user.type == 'customer') {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new CustomerHomePage()),
+                              builder: (context) => new CustomerHomePage(),
+                            ),
                           );
                         } else if (user.type == 'owner') {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => new OwnerHomePage()),
+                              builder: (context) =>
+                                  new OwnerHomePage(ownerId: user.id),
+                            ),
                           );
                         }
                         // TODO: Add error handling

@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:DeliEat/models/restaurant.dart';
 import 'package:http/http.dart' as http;
 
-const ALL_RESTAURANTS_URL = 'http://10.0.2.2:3000/restaurants/all';
-const OWNER_RESTAURANTS_URL = 'http://10.0.2.2:3000/restaurants/owner/';
+const allRestaurantUrl = 'http://10.0.2.2:3000/restaurants/all';
+const ownerRestaurantUrl = 'http://10.0.2.2:3000/restaurants/owner/';
 
 Future<List<Restaurant>> getRestaurants() async {
   final response = await http.get(
-    ALL_RESTAURANTS_URL,
+    allRestaurantUrl,
   );
 
   List<dynamic> restaurantsJSON = json.decode(response.body);
@@ -22,9 +22,9 @@ Future<List<Restaurant>> getRestaurants() async {
   return restaurants;
 }
 
-Future<List<Restaurant>> getOwnerRestaurants(String ownerId) async {
+Future<List<Restaurant>> getOwnerRestaurants(int ownerId) async {
   final response = await http.get(
-    OWNER_RESTAURANTS_URL + ownerId,
+    ownerRestaurantUrl + ownerId.toString(),
   );
 
   List<dynamic> restaurantsJSON = json.decode(response.body);
