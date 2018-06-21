@@ -8,7 +8,7 @@ class CustomerHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Home"),
+        title: new Text("Nearby Restaurants"),
       ),
       body: new Column(
         children: <Widget>[
