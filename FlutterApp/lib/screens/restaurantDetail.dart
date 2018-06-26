@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../views/menuCategoryView.dart';
 import '../theme/colors.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
@@ -148,7 +147,6 @@ class _MenuSectionState extends State<_MenuSection> {
             "Menu:",
           ),
           new Divider(),
-          new MenuCategoryView(),
         ],
       ),
     );

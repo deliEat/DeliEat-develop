@@ -4,16 +4,48 @@ import 'package:DeliEat/models/user.dart';
 import 'package:DeliEat/screens/customerHome.dart';
 import 'package:DeliEat/screens/ownerHome.dart';
 import 'package:DeliEat/screens/register.dart';
+import 'package:DeliEat/support/log.dart';
 import 'package:flutter/material.dart';
 import '../services/account.dart';
 import '../theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
+  LoginPage({Key key}) : super(key: key);
+
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future<User> _sessionUser = getSessionUser();
+
+  @override
+  Widget build(BuildContext context) {
+    return new FutureBuilder(
+      future: _sessionUser,
+      builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return const CircularProgressIndicator();
+          default:
+            if (snapshot.hasError || !snapshot.hasData || snapshot.data == null)
+              return new _loginView();
+            else {
+              loginScreenLogger.info(
+                  'User session is restored for user ${snapshot.data.name}');
+              if (snapshot.data.type == customer) {
+                return new CustomerHomePage();
+              } else {
+                return new OwnerHomePage(ownerId: snapshot.data.id);
+              }
+            }
+        }
+      },
+    );
+  }
+}
+
+class _loginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -124,14 +156,14 @@ class _LoginFormState extends State<_LoginForm> {
                       );
                       user.then((user) {
                         startUserSession(user);
-                        if (user.type == 'customer') {
+                        if (user.type == customer) {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
                               builder: (context) => new CustomerHomePage(),
                             ),
                           );
-                        } else if (user.type == 'owner') {
+                        } else if (user.type == owner) {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
