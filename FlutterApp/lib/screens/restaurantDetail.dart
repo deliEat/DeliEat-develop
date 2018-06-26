@@ -1,3 +1,4 @@
+import 'package:DeliEat/views/menuCategoryView.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 
@@ -66,6 +67,7 @@ class _RestaurantBanner extends StatelessWidget {
         ),
       ),
       decoration: new BoxDecoration(
+        color: deliEatBackgroundWhite,
         image: new DecorationImage(
           image: new AssetImage('assets/food.jpg'),
           fit: BoxFit.fill,
@@ -73,6 +75,12 @@ class _RestaurantBanner extends StatelessWidget {
             Colors.black.withOpacity(0.2), BlendMode.dstATop),
         ),
         border: new Border(bottom: new BorderSide(color: Theme.of(context).dividerColor)),
+        boxShadow: [
+          new BoxShadow(
+            color: deliEatGrey,
+            blurRadius: 5.0,
+          ),
+        ],
       ),
     );
   }
@@ -116,6 +124,7 @@ class _BottomBarState extends State<_BottomBar> {
         ),
       decoration: new BoxDecoration(
         border: new Border(top: new BorderSide(color: Theme.of(context).dividerColor)),
+        color: deliEatBackgroundWhite,
       ),
     );
   }
@@ -145,8 +154,15 @@ class _MenuSectionState extends State<_MenuSection> {
         children: <Widget>[
           new Text(
             "Menu:",
+            style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            ),
           ),
           new Divider(),
+          new MenuCategoryView(),
+          new MenuCategoryView(),
+          new MenuCategoryView(),
         ],
       ),
     );
