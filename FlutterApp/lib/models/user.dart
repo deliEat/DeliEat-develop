@@ -2,6 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
+const customer = 'customer';
+const owner = 'owner';
+
 @JsonSerializable()
 class User extends Object with _$UserSerializerMixin {
   @JsonKey(name: 'email')

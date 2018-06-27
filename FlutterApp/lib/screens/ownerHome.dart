@@ -1,4 +1,6 @@
+import 'package:DeliEat/main.dart';
 import 'package:DeliEat/models/restaurant.dart';
+import 'package:DeliEat/services/account.dart';
 import 'package:DeliEat/services/restaurant.dart';
 import 'package:DeliEat/views/restaurantListView.dart';
 import 'package:DeliEat/screens/ownerAddRestaurant.dart';
@@ -16,17 +18,23 @@ class OwnerHomePage extends StatelessWidget {
         title: new Text("My Restaurants"),
         actions: <Widget>[
           new IconButton(
-            icon: new Icon(const IconData(0xe145, fontFamily: 'MaterialIcons')),
+            icon: new Icon(Icons.exit_to_app),
             onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                  builder: (context) =>
-                  new OwnerAddRestaurantPage(),
-                ),
-              );
+              endUserSession();
+              main();
             },
           ),
+          new IconButton(
+              icon:
+                  new Icon(const IconData(0xe145, fontFamily: 'MaterialIcons')),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new OwnerAddRestaurantPage(),
+                  ),
+                );
+              }),
         ],
       ),
       body: new Column(

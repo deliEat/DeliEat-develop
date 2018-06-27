@@ -1,5 +1,5 @@
+import 'package:DeliEat/views/menuCategoryView.dart';
 import 'package:flutter/material.dart';
-import '../views/menuCategoryView.dart';
 import '../theme/colors.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
