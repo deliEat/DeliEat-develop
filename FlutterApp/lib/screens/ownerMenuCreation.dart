@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
+import '../services/account.dart';
 
 class OwnerMenuCreationPage extends StatefulWidget {
+  //todo: add more values
+
   @override
   _OwnerMenuCreationPageState createState() =>
       new _OwnerMenuCreationPageState();
@@ -80,7 +83,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               onPressed: () {
-                //TODO, remove this entry
+                //TODO, remove this entry, but how?
               },
             ),
           ),

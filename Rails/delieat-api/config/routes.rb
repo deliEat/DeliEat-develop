@@ -5,5 +5,13 @@ Rails.application.routes.draw do
 
   get 'restaurants/all', to: 'restaurant_service#index'
   get 'restaurants/owner/:owner_id', to: 'restaurant_service#of_owner'
-  post 'add-restaurants', to: 'restaurant_service#create'
+
+  post 'restaurants/owner', to: 'restaurant_service#create'
+
+  post 'menu', to: 'menus#create'
+  get  'menu/:menu_id', to: 'menus#show_menu'
+  get  'menu/:menu_id/menu_item', to: 'menus#show_menu_items'
+  post 'menu/:menu_id/menu_item', to: 'menu_items#create'
+  put  'menu/:menu_id/menu_item/:menu_item_id', to: 'menu_items#update'
+  get  'menu/:menu_id/menu_item/:menu_item_id', to: 'menu_items#show'
 end

@@ -3,7 +3,7 @@
 part of 'user.dart';
 
 // **************************************************************************
-// Generator: JsonSerializableGenerator
+// JsonSerializableGenerator
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) {

@@ -1,8 +1,19 @@
+import 'dart:async';
+
+import 'package:DeliEat/models/user.dart';
+import 'package:DeliEat/screens/ownerAddRestaurantSuccess.dart';
 import 'package:flutter/material.dart';
 import '../screens/ownerMenuCreation.dart';
 import '../theme/colors.dart';
+import 'package:DeliEat/models/restaurant.dart';
+import 'package:DeliEat/services/restaurant.dart';
+import 'package:DeliEat/services/account.dart';
 
 final _restaurantFormKey = new GlobalKey<FormState>();
+final _restaurantNameFormController = new TextEditingController();
+final _restaurantEstimatedCookTimeFormController = new TextEditingController();
+final _restaurantPhoneNumberFormController = new TextEditingController();
+final _restaurantCampusFormController = new TextEditingController();
 
 class OwnerAddRestaurantPage extends StatefulWidget {
   @override
@@ -15,7 +26,7 @@ class _OwnerAddRestaurantPageState extends State<OwnerAddRestaurantPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Add Restaurant"),
+        title: new Text("Create Restaurant"),
       ),
       body: new Column(
         children: <Widget>[
@@ -109,25 +120,40 @@ class _RestaurantInfoSectionState extends State<_RestaurantInfoSection> {
   Widget build(BuildContext context) {
     return new Form(
       key: _restaurantFormKey,
-        child: new Expanded(
-      child: ListView(
-        children: <Widget>[
-          buildInfoItem("Restaurant Name", (value) {
-            if (value.isEmpty) {
-              return 'Please enter some text';
-            }
-          }, TextInputType.text),
-          buildInfoItem("Contact Name", (value) {}, TextInputType.text),
-          buildInfoItem("Phone Number", (value) {}, TextInputType.number),
-          buildInfoItem("Some some info", (value) {}, TextInputType.text),
-        ],
+      child: new Expanded(
+        child: ListView(
+          children: <Widget>[
+            buildInfoItem("Restaurant Name", (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+            }, TextInputType.text, _restaurantNameFormController),
+            buildInfoItem("Estimated Cook time", (value) {
+              if (value.isEmpty) {
+                return 'Please enter some integer in minutes';
+              }
+            }, TextInputType.number, _restaurantEstimatedCookTimeFormController),
+            buildInfoItem("Phone Number", (value) {
+              if (value.isEmpty) {
+                return 'Please enter some number';
+              }
+            }, TextInputType.number, _restaurantPhoneNumberFormController),
+            buildInfoItem("Campus", (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+            }, TextInputType.text, _restaurantCampusFormController),
+          ],
+        ),
       ),
-    )
     );
   }
 
   Container buildInfoItem(
-    String title, FormFieldValidator validator, TextInputType keyboardType
+    String title,
+    FormFieldValidator validator,
+    TextInputType keyboardType,
+    TextEditingController textController
   ) {
     return new Container(
       margin: const EdgeInsets.symmetric(
@@ -136,6 +162,7 @@ class _RestaurantInfoSectionState extends State<_RestaurantInfoSection> {
       ),
       //todo: probably need onSave() as well.
       child: new TextFormField(
+        controller: textController,
         validator: validator,
         keyboardType: keyboardType,
         decoration: InputDecoration(
@@ -163,22 +190,30 @@ class _RestaurantBottomBarSectionState
         children: <Widget>[
           new Expanded(
             child: new RaisedButton(
-              child: Text("Proceed to Menu Creation"),
+              child: Text("Create Restaurant"),
               elevation: 3.0,
               textColor: deliEatBackgroundWhite,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               onPressed: () {
-                //TODO: onpressed Event, lead to next page.
                 if (_restaurantFormKey.currentState.validate()) {
-                  //TODO: do something when it's validated, just redirecting to ownerMenuCreation for now.
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                      builder: (context) => new OwnerMenuCreationPage(),
-                    ),
-                  );
+                  Future<User> user = getSessionUser();
+                  user.then((user) {
+                    Restaurant newRestaurant = new Restaurant(
+                      _restaurantNameFormController.text,
+                      int.parse(_restaurantEstimatedCookTimeFormController.text),
+                      user.id);
+                    Future<Restaurant> restaurant = createRestaurant(newRestaurant);
+                    restaurant.then((restaurant) {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                          builder: (context) => new RestaurantAddSuccessPage(),
+                        ),
+                      );
+                    });
+                  });
                 }
               },
             ),

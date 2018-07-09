@@ -10,7 +10,10 @@ class Restaurant extends Object with _$RestaurantSerializerMixin {
   @JsonKey(name: 'estimated_cook_time')
   final int estimatedCookTime;
 
-  Restaurant(this.name, this.estimatedCookTime);
+  @JsonKey(name: 'owner_id')
+  final int ownerId;
+
+  Restaurant(this.name, this.estimatedCookTime, this.ownerId);
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => _$RestaurantFromJson(json);
 }
