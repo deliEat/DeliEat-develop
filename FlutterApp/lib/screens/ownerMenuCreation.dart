@@ -1,9 +1,13 @@
+import 'package:DeliEat/models/restaurant.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../services/account.dart';
 
+//TODO: get data from all menu item and send them as package to create menu!
 class OwnerMenuCreationPage extends StatefulWidget {
-  //todo: add more values
+  Restaurant restaurant;
+
+  OwnerMenuCreationPage({this.restaurant});
 
   @override
   _OwnerMenuCreationPageState createState() =>

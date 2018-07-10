@@ -40,9 +40,18 @@ Future<List<Restaurant>> getOwnerRestaurants(int ownerId) async {
 }
 
 Future<Restaurant> createRestaurant(Restaurant r) async {
-  final response = await http.post(
-    //TODO: fix missing param on ruby side!
-    createOwnerRestaurantUrl, body: json.encode(r),
+  Map<String, dynamic> jsonMap = {
+    'restaurant': {
+      'name': r.name,
+      'owner_id': r.ownerId,
+      'estimated_cook_time': r.estimatedCookTime
+    }
+  };
+
+  final client = new http.Client();
+  final response = await client.post(
+    createOwnerRestaurantUrl, body: json.encode(jsonMap),
+    headers: {'Content-type': 'application/json'},
   ).catchError((e, stackTrace) {
     accountServiceLogger.severe('Cannot add restaurant');
   });

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:DeliEat/models/user.dart';
 import 'package:DeliEat/screens/ownerAddRestaurantSuccess.dart';
 import 'package:flutter/material.dart';
-import '../screens/ownerMenuCreation.dart';
 import '../theme/colors.dart';
 import 'package:DeliEat/models/restaurant.dart';
 import 'package:DeliEat/services/restaurant.dart';
@@ -209,7 +208,9 @@ class _RestaurantBottomBarSectionState
                       Navigator.push(
                         context,
                         new MaterialPageRoute(
-                          builder: (context) => new RestaurantAddSuccessPage(),
+                          builder: (context) => new RestaurantAddSuccessPage(
+                            newRestaurant: restaurant,
+                          ),
                         ),
                       );
                     });

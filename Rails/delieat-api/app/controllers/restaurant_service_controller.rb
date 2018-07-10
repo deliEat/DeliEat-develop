@@ -21,7 +21,7 @@ class RestaurantServiceController < ApplicationController
     end
 
     private
-        def restaurant_params
-            params.require(:restaurant).permit(:owner_id, :name, :estimated_cook_time, :campus)
-        end
+    def restaurant_params
+        params.require(:restaurant).permit(:owner_id, :name, :estimated_cook_time)
+    end
 end
