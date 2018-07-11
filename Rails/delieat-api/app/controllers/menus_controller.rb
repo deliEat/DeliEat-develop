@@ -6,14 +6,14 @@ class MenusController < ApplicationController
     @menu = Menu.new(create_params)
 
     @menu_items = params[:menu][:menu_items]
-    @restaurant_id = params[:menu][:restaurant_id]
-    @restaurant = Restaurant.find(@restaurant_id)
+    # @restaurant_id = params[:menu][:restaurant_id]
+    # @restaurant = Restaurant.find(@restaurant_id)
 
-    if @restaurant
-      @menu.restaurant = @restaurant
-    else
-      render :json => {error: "Restaurant for the menu does not exist"}, :status => :bad_request
-    end
+    # if @restaurant
+    #   @menu.restaurant = @restaurant
+    # else
+    #   render :json => {error: "Restaurant for the menu does not exist"}, :status => :bad_request
+    # end
 
     @menu_items.each do |menu_item|
       create_menu_item(menu_item, @menu)
