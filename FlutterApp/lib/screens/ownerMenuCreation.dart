@@ -1,7 +1,8 @@
 import 'package:DeliEat/models/restaurant.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
-import '../services/account.dart';
+
+List<Widget> rowDisplayed = new List();
 
 //TODO: get data from all menu item and send them as package to create menu!
 class OwnerMenuCreationPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class _OwnerMenuCreationPageState extends State<OwnerMenuCreationPage> {
           new _CreateMenuSection(),
         ],
       ),
+      bottomNavigationBar: new _MenuCreationBottomBarSection(),
     );
   }
 }
@@ -38,6 +40,7 @@ class _CreateMenuItemContainer extends StatefulWidget {
 
 class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
   List<Widget> itemDisplayed = [];
+  TextEditingController menuType = new TextEditingController();
 
   Widget createMenuItem() {
     return new Container(
@@ -132,6 +135,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           new TextFormField(
+            controller: menuType,
             validator: (value) {
               if (value.isEmpty) {
                 return 'Menu needs a category';
@@ -168,13 +172,11 @@ class _CreateMenuSection extends StatefulWidget {
 }
 
 class _CreateMenuSectionState extends State<_CreateMenuSection> {
-  List<Widget> rowDisplayed = new List();
-
   Widget createMenuButton() {
     return new Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: RaisedButton(
-        child: Text("Create Menu"),
+        child: Text("Add Menu"),
         elevation: 3.0,
         textColor: deliEatBackgroundWhite,
         shape: RoundedRectangleBorder(
@@ -205,6 +207,46 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: determineRow(),
+      ),
+    );
+  }
+}
+
+class _MenuCreationBottomBarSection extends StatefulWidget {
+  @override
+  _MenuCreationBottomBarSectionState createState() =>
+    new _MenuCreationBottomBarSectionState();
+}
+
+class _MenuCreationBottomBarSectionState
+  extends State<_MenuCreationBottomBarSection> {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new RaisedButton(
+              child: Text("Create Restaurant Menus"),
+              elevation: 3.0,
+              textColor: deliEatBackgroundWhite,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              onPressed: () {
+                for (Widget row in rowDisplayed) {
+
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+      decoration: new BoxDecoration(
+        border: new Border(
+          top: new BorderSide(color: Theme.of(context).dividerColor)),
+        color: deliEatBackgroundWhite,
       ),
     );
   }
