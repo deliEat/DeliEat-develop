@@ -111,9 +111,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         ),
         onPressed: () {
           setState(() {
-            itemDisplayed.removeLast();
             itemDisplayed.add(createMenuItem());
-            itemDisplayed.add(createMenuItemAddButton());
           });
         },
       ),
@@ -121,13 +119,6 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
   }
 
   Widget build(BuildContext context) {
-    List<Widget> determineItemDisplayed() {
-      if (itemDisplayed.length == 0) {
-        itemDisplayed.add(createMenuItemAddButton());
-      }
-      return itemDisplayed;
-    }
-
     return new Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -148,7 +139,12 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
           ),
           new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: determineItemDisplayed(),
+            children: <Widget>[
+              new Column(
+                children: itemDisplayed,
+              ),
+              createMenuItemAddButton(),
+            ],
           ),
         ],
       ),
@@ -184,9 +180,7 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
         ),
         onPressed: () {
           setState(() {
-            rowDisplayed.removeLast();
             rowDisplayed.add(_CreateMenuItemContainer());
-            rowDisplayed.add(createMenuButton());
           });
         },
       ),
@@ -195,18 +189,16 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> determineRow() {
-      if (rowDisplayed.length == 0) {
-        rowDisplayed.add(createMenuButton());
-      }
-      return rowDisplayed;
-    }
-
     return new Container(
       padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: determineRow(),
+        children: <Widget>[
+          new Column(
+            children: rowDisplayed,
+          ),
+          createMenuButton(),
+        ],
       ),
     );
   }
@@ -236,7 +228,6 @@ class _MenuCreationBottomBarSectionState
               ),
               onPressed: () {
                 for (Widget row in rowDisplayed) {
-
                 }
               },
             ),
