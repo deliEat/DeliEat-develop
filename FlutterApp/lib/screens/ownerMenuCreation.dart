@@ -1,4 +1,5 @@
 import 'package:DeliEat/models/restaurant.dart';
+import 'package:DeliEat/support/log.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 
@@ -24,7 +25,7 @@ class _OwnerMenuCreationPageState extends State<OwnerMenuCreationPage> {
       ),
       body: new ListView(
         children: <Widget>[
-          new _CreateMenuSection(),
+          new _MenuCategories(),
         ],
       ),
       bottomNavigationBar: new _MenuCreationBottomBarSection(),
@@ -32,17 +33,18 @@ class _OwnerMenuCreationPageState extends State<OwnerMenuCreationPage> {
   }
 }
 
-class _CreateMenuItemContainer extends StatefulWidget {
+class _MenuItem extends StatefulWidget {
+  ValueChanged<_MenuItem> deleteMenuItem;
+
+  _MenuItem({this.deleteMenuItem});
+  
   @override
-  _CreateMenuItemContainerState createState() =>
-      new _CreateMenuItemContainerState();
+  __MenuItemState createState() => new __MenuItemState();
 }
 
-class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
-  List<Widget> itemDisplayed = [];
-  TextEditingController menuType = new TextEditingController();
-
-  Widget createMenuItem() {
+class __MenuItemState extends State<_MenuItem> {
+  @override
+  Widget build(BuildContext context) {
     return new Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: new Row(
@@ -90,13 +92,29 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               onPressed: () {
-                //TODO, remove this entry, but how?
+                widget.deleteMenuItem(widget);
               },
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _MenuCategory extends StatefulWidget {
+  @override
+  __MenuCategoryState createState() => new __MenuCategoryState();
+}
+
+class __MenuCategoryState extends State<_MenuCategory> {
+  List<_MenuItem> menuItems = [];
+  TextEditingController menuCategoryType = new TextEditingController();
+  
+  void deleteMenuItem(_MenuItem menuItem) {
+    setState(() {
+      menuItems.remove(menuItem);
+    });
   }
 
   Widget createMenuItemAddButton() {
@@ -111,7 +129,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         ),
         onPressed: () {
           setState(() {
-            itemDisplayed.add(createMenuItem());
+            menuItems.add(new _MenuItem(deleteMenuItem: deleteMenuItem));
           });
         },
       ),
@@ -126,7 +144,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           new TextFormField(
-            controller: menuType,
+            controller: menuCategoryType,
             validator: (value) {
               if (value.isEmpty) {
                 return 'Menu needs a category';
@@ -139,13 +157,9 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
           ),
           new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new Column(
-                children: itemDisplayed,
-              ),
-              createMenuItemAddButton(),
-            ],
+            children: menuItems,
           ),
+          createMenuItemAddButton(),
         ],
       ),
       decoration: new BoxDecoration(
@@ -162,12 +176,12 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
   }
 }
 
-class _CreateMenuSection extends StatefulWidget {
+class _MenuCategories extends StatefulWidget {
   @override
-  _CreateMenuSectionState createState() => new _CreateMenuSectionState();
+  _MenuCategoriesState createState() => new _MenuCategoriesState();
 }
 
-class _CreateMenuSectionState extends State<_CreateMenuSection> {
+class _MenuCategoriesState extends State<_MenuCategories> {
   Widget createMenuButton() {
     return new Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
@@ -180,7 +194,7 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
         ),
         onPressed: () {
           setState(() {
-            rowDisplayed.add(_CreateMenuItemContainer());
+            rowDisplayed.add(_MenuCategory());
           });
         },
       ),
@@ -207,11 +221,11 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
 class _MenuCreationBottomBarSection extends StatefulWidget {
   @override
   _MenuCreationBottomBarSectionState createState() =>
-    new _MenuCreationBottomBarSectionState();
+      new _MenuCreationBottomBarSectionState();
 }
 
 class _MenuCreationBottomBarSectionState
-  extends State<_MenuCreationBottomBarSection> {
+    extends State<_MenuCreationBottomBarSection> {
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -228,6 +242,7 @@ class _MenuCreationBottomBarSectionState
               ),
               onPressed: () {
                 for (Widget row in rowDisplayed) {
+                  
                 }
               },
             ),
@@ -236,7 +251,7 @@ class _MenuCreationBottomBarSectionState
       ),
       decoration: new BoxDecoration(
         border: new Border(
-          top: new BorderSide(color: Theme.of(context).dividerColor)),
+            top: new BorderSide(color: Theme.of(context).dividerColor)),
         color: deliEatBackgroundWhite,
       ),
     );
