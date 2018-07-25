@@ -1,6 +1,6 @@
 import 'package:map_view/map_view.dart';
 
-const mapApiKey = 'AIzaSyAUwIOaSol54P8-pWjK1_ii9-MnSGTPjo4';
+const mapApiKey = '';
 
 void initializeGoogleMaps() {
   MapView.setApiKey(mapApiKey);
