@@ -40,6 +40,11 @@ class MenusController < ApplicationController
 
   end
 
+  def get_menus_by_restaurant
+    @menu = Menu.where(params[:restaurant_id])
+    render :json => @menu
+  end
+
   def show_menu
     @menu = Menu.find(params[:menu_id])
     render :json => @menu

@@ -1,7 +1,9 @@
 import 'package:DeliEat/models/restaurant.dart';
+import 'package:DeliEat/support/log.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
-import '../services/account.dart';
+
+List<Widget> rowDisplayed = new List();
 
 //TODO: get data from all menu item and send them as package to create menu!
 class OwnerMenuCreationPage extends StatefulWidget {
@@ -23,23 +25,26 @@ class _OwnerMenuCreationPageState extends State<OwnerMenuCreationPage> {
       ),
       body: new ListView(
         children: <Widget>[
-          new _CreateMenuSection(),
+          new _MenuCategories(),
         ],
       ),
+      bottomNavigationBar: new _MenuCreationBottomBarSection(),
     );
   }
 }
 
-class _CreateMenuItemContainer extends StatefulWidget {
+class _MenuItem extends StatefulWidget {
+  ValueChanged<_MenuItem> deleteMenuItem;
+
+  _MenuItem({this.deleteMenuItem});
+  
   @override
-  _CreateMenuItemContainerState createState() =>
-      new _CreateMenuItemContainerState();
+  __MenuItemState createState() => new __MenuItemState();
 }
 
-class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
-  List<Widget> itemDisplayed = [];
-
-  Widget createMenuItem() {
+class __MenuItemState extends State<_MenuItem> {
+  @override
+  Widget build(BuildContext context) {
     return new Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: new Row(
@@ -87,13 +92,29 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               onPressed: () {
-                //TODO, remove this entry, but how?
+                widget.deleteMenuItem(widget);
               },
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _MenuCategory extends StatefulWidget {
+  @override
+  __MenuCategoryState createState() => new __MenuCategoryState();
+}
+
+class __MenuCategoryState extends State<_MenuCategory> {
+  List<_MenuItem> menuItems = [];
+  TextEditingController menuCategoryType = new TextEditingController();
+  
+  void deleteMenuItem(_MenuItem menuItem) {
+    setState(() {
+      menuItems.remove(menuItem);
+    });
   }
 
   Widget createMenuItemAddButton() {
@@ -108,9 +129,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         ),
         onPressed: () {
           setState(() {
-            itemDisplayed.removeLast();
-            itemDisplayed.add(createMenuItem());
-            itemDisplayed.add(createMenuItemAddButton());
+            menuItems.add(new _MenuItem(deleteMenuItem: deleteMenuItem));
           });
         },
       ),
@@ -118,13 +137,6 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
   }
 
   Widget build(BuildContext context) {
-    List<Widget> determineItemDisplayed() {
-      if (itemDisplayed.length == 0) {
-        itemDisplayed.add(createMenuItemAddButton());
-      }
-      return itemDisplayed;
-    }
-
     return new Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -132,6 +144,7 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           new TextFormField(
+            controller: menuCategoryType,
             validator: (value) {
               if (value.isEmpty) {
                 return 'Menu needs a category';
@@ -144,8 +157,9 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
           ),
           new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: determineItemDisplayed(),
+            children: menuItems,
           ),
+          createMenuItemAddButton(),
         ],
       ),
       decoration: new BoxDecoration(
@@ -162,19 +176,17 @@ class _CreateMenuItemContainerState extends State<_CreateMenuItemContainer> {
   }
 }
 
-class _CreateMenuSection extends StatefulWidget {
+class _MenuCategories extends StatefulWidget {
   @override
-  _CreateMenuSectionState createState() => new _CreateMenuSectionState();
+  _MenuCategoriesState createState() => new _MenuCategoriesState();
 }
 
-class _CreateMenuSectionState extends State<_CreateMenuSection> {
-  List<Widget> rowDisplayed = new List();
-
+class _MenuCategoriesState extends State<_MenuCategories> {
   Widget createMenuButton() {
     return new Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: RaisedButton(
-        child: Text("Create Menu"),
+        child: Text("Add Menu"),
         elevation: 3.0,
         textColor: deliEatBackgroundWhite,
         shape: RoundedRectangleBorder(
@@ -182,9 +194,7 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
         ),
         onPressed: () {
           setState(() {
-            rowDisplayed.removeLast();
-            rowDisplayed.add(_CreateMenuItemContainer());
-            rowDisplayed.add(createMenuButton());
+            rowDisplayed.add(_MenuCategory());
           });
         },
       ),
@@ -193,18 +203,56 @@ class _CreateMenuSectionState extends State<_CreateMenuSection> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> determineRow() {
-      if (rowDisplayed.length == 0) {
-        rowDisplayed.add(createMenuButton());
-      }
-      return rowDisplayed;
-    }
-
     return new Container(
       padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: determineRow(),
+        children: <Widget>[
+          new Column(
+            children: rowDisplayed,
+          ),
+          createMenuButton(),
+        ],
+      ),
+    );
+  }
+}
+
+class _MenuCreationBottomBarSection extends StatefulWidget {
+  @override
+  _MenuCreationBottomBarSectionState createState() =>
+      new _MenuCreationBottomBarSectionState();
+}
+
+class _MenuCreationBottomBarSectionState
+    extends State<_MenuCreationBottomBarSection> {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new RaisedButton(
+              child: Text("Create Restaurant Menus"),
+              elevation: 3.0,
+              textColor: deliEatBackgroundWhite,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              onPressed: () {
+                for (Widget row in rowDisplayed) {
+                  
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+      decoration: new BoxDecoration(
+        border: new Border(
+            top: new BorderSide(color: Theme.of(context).dividerColor)),
+        color: deliEatBackgroundWhite,
       ),
     );
   }

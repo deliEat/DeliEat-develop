@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../screens/ownerMenuCreation.dart';
 
-class RestaurantAddSuccessPage extends StatefulWidget {
+class RestaurantEditPage extends StatefulWidget {
   Restaurant newRestaurant;
 
-  RestaurantAddSuccessPage({
+  RestaurantEditPage({
     Key key,
     @required this.newRestaurant
   }) : super(key: key);
 
   @override
-  _RestaurantAddSuccessPageState createState() => new _RestaurantAddSuccessPageState();
+  _RestaurantEditPageState createState() => new _RestaurantEditPageState();
 }
 
-class _RestaurantAddSuccessPageState extends State<RestaurantAddSuccessPage> {
+class _RestaurantEditPageState extends State<RestaurantEditPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -29,6 +29,19 @@ class _RestaurantAddSuccessPageState extends State<RestaurantAddSuccessPage> {
     );
   }
 }
+
+class _MenuDisplaySection extends StatefulWidget {
+  @override
+  __MenuDisplaySectionState createState() => new __MenuDisplaySectionState();
+}
+
+class __MenuDisplaySectionState extends State<_MenuDisplaySection> {
+  @override
+  Widget build(BuildContext context) {
+    return new Container();
+  }
+}
+
 
 class _RestaurantBottomBarSection extends StatefulWidget {
   Restaurant r;
