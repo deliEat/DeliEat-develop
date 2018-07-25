@@ -1,5 +1,7 @@
+import 'package:DeliEat/services/map.dart';
 import 'package:DeliEat/views/menuCategoryView.dart';
 import 'package:flutter/material.dart';
+import 'package:map_view/map_view.dart';
 import '../theme/colors.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
@@ -17,6 +19,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
       body: new Column(
         children: <Widget>[
           new _RestaurantBanner(),
+          new _MapSection(),
           new _MenuSection(),
         ],
       ),
@@ -55,10 +58,7 @@ class _RestaurantBanner extends StatelessWidget {
                 new Expanded(
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      new Text("Rating:"),
-                      new Text("Estimated Cook Time:")
-                    ],
+                    children: <Widget>[new Text("Rating:"), new Text("Estimated Cook Time:")],
                   ),
                 ),
               ],
@@ -71,8 +71,7 @@ class _RestaurantBanner extends StatelessWidget {
         image: new DecorationImage(
           image: new AssetImage('assets/food.jpg'),
           fit: BoxFit.fill,
-          colorFilter: new ColorFilter.mode(
-            Colors.black.withOpacity(0.2), BlendMode.dstATop),
+          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
         ),
         border: new Border(bottom: new BorderSide(color: Theme.of(context).dividerColor)),
         boxShadow: [
@@ -95,33 +94,30 @@ class _BottomBarState extends State<_BottomBar> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        child: new Row(
-          children: <Widget>[
-            new Expanded(
-              child: buildIconRow(
-                  const IconData(0xe227, fontFamily: 'MaterialIcons'), "10.00"),
-            ),
-            new Expanded(
-              child: buildIconRow(
-                  const IconData(0xe192, fontFamily: 'MaterialIcons'),
-                  "45 min"),
-            ),
-            new Expanded(
-              child: new RaisedButton(
-                child: Text("Proceed"),
-                elevation: 3.0,
-                textColor: deliEatBackgroundWhite,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                ),
-                onPressed: () {
-                  //TODO: onpressed Event, lead to next page.
-                },
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: buildIconRow(const IconData(0xe227, fontFamily: 'MaterialIcons'), "10.00"),
+          ),
+          new Expanded(
+            child: buildIconRow(const IconData(0xe192, fontFamily: 'MaterialIcons'), "45 min"),
+          ),
+          new Expanded(
+            child: new RaisedButton(
+              child: Text("Proceed"),
+              elevation: 3.0,
+              textColor: deliEatBackgroundWhite,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
+              onPressed: () {
+                //TODO: onpressed Event, lead to next page.
+              },
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
       decoration: new BoxDecoration(
         border: new Border(top: new BorderSide(color: Theme.of(context).dividerColor)),
         color: deliEatBackgroundWhite,
@@ -136,6 +132,19 @@ class _BottomBarState extends State<_BottomBar> {
         const SizedBox(width: 3.0),
         new Text(label),
       ],
+    );
+  }
+}
+
+class _MapSection extends StatelessWidget {
+  final Uri staticMapUri =
+      MapService.staticMapProvider.getStaticUri(new Location(45.52309483308097, -122.67339684069155), 12);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+      child: new Image.network(staticMapUri.toString()),
     );
   }
 }
