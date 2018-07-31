@@ -1,7 +1,7 @@
 import 'package:DeliEat/models/restaurant.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
-import '../screens/ownerMenuCreation.dart';
+import '../pages/ownerMenuCreation.dart';
 
 class RestaurantEditPage extends StatefulWidget {
   Restaurant newRestaurant;

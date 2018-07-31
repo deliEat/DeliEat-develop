@@ -1,5 +1,4 @@
 import 'package:DeliEat/models/restaurant.dart';
-import 'package:DeliEat/support/log.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 

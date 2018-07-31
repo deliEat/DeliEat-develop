@@ -1,5 +1,5 @@
 import 'package:DeliEat/models/restaurant.dart';
-import 'package:DeliEat/screens/restaurantDetail.dart';
+import 'package:DeliEat/pages/restaurantDetail.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantListView extends StatefulWidget {

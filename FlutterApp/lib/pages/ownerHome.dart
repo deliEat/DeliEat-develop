@@ -3,7 +3,7 @@ import 'package:DeliEat/models/restaurant.dart';
 import 'package:DeliEat/services/account.dart';
 import 'package:DeliEat/services/restaurant.dart';
 import 'package:DeliEat/views/restaurantListView.dart';
-import 'package:DeliEat/screens/ownerAddRestaurant.dart';
+import 'package:DeliEat/pages/ownerAddRestaurant.dart';
 import 'package:flutter/material.dart';
 
 class OwnerHomePage extends StatelessWidget {

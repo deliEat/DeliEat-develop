@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:DeliEat/models/user.dart';
-import 'package:DeliEat/screens/ownerEditRestaurant.dart';
+import 'package:DeliEat/pages/ownerEditRestaurant.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import 'package:DeliEat/models/restaurant.dart';

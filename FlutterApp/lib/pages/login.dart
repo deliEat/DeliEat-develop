@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:DeliEat/models/user.dart';
-import 'package:DeliEat/screens/customerHome.dart';
-import 'package:DeliEat/screens/ownerHome.dart';
-import 'package:DeliEat/screens/register.dart';
+import 'package:DeliEat/pages/customerHome.dart';
+import 'package:DeliEat/pages/ownerHome.dart';
+import 'package:DeliEat/pages/register.dart';
 import 'package:DeliEat/support/log.dart';
 import 'package:flutter/material.dart';
 import '../services/account.dart';

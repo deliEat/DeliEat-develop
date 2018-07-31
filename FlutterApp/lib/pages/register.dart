@@ -1,5 +1,5 @@
-import 'package:DeliEat/screens/registerCustomer.dart';
-import 'package:DeliEat/screens/registerOwner.dart';
+import 'package:DeliEat/pages/registerCustomer.dart';
+import 'package:DeliEat/pages/registerOwner.dart';
 import 'package:DeliEat/theme/colors.dart';
 import 'package:flutter/material.dart';
 
