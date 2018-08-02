@@ -8,12 +8,12 @@ part of 'user.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return new User(
-      json['email'] as String,
-      json['full_name'] as String,
-      json['id'] as int,
-      json['phone_number'] as String,
-      json['user_type'] as String,
-      json['user_id'] as int);
+      email: json['email'] as String,
+      name: json['full_name'] as String,
+      id: json['id'] as int,
+      phoneNumber: json['phone_number'] as String,
+      type: json['user_type'] as String,
+      userId: json['user_id'] as int);
 }
 
 abstract class _$UserSerializerMixin {

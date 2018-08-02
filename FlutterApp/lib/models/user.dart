@@ -25,14 +25,14 @@ class User extends Object with _$UserSerializerMixin {
   @JsonKey(name: 'user_id')
   final int userId;
 
-  User(
+  User({
     this.email,
     this.name,
     this.id,
     this.phoneNumber,
     this.type,
     this.userId,
-  );
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

@@ -1,5 +1,6 @@
-import 'package:DeliEat/reducers/app_reducer.dart';
+import 'package:DeliEat/middleware/app_middleware.dart';
 import 'package:DeliEat/pages/login.dart';
+import 'package:DeliEat/reducers/app_reducer.dart';
 import 'package:DeliEat/services/map.dart';
 import 'package:DeliEat/states/app_state.dart';
 import 'package:DeliEat/support/log.dart';
@@ -16,7 +17,8 @@ void main() {
 class DeliEatApp extends StatelessWidget {
   final store = Store<AppState>(
     appReducer,
-    initialState: AppState(),
+    initialState: AppState.initialState(),
+    middleware: appMiddleware(),
   );
 
   @override

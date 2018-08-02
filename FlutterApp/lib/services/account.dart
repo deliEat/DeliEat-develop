@@ -58,8 +58,8 @@ void endUserSession() {
 }
 
 Future<User> getSessionUser() {
-  Future<SharedPreferences> _sharedPref = SharedPreferences.getInstance();
-  return _sharedPref.then((sf) {
+  Future<SharedPreferences> sharedPref = SharedPreferences.getInstance();
+  return sharedPref.then((sf) {
     int _userId = sf.getInt(userId);
     if (_userId == null) return null;
 
@@ -70,12 +70,12 @@ Future<User> getSessionUser() {
     int _id = _type == customer ? sf.getInt(customerId) : sf.getInt(ownerId);
 
     return new User(
-      _email,
-      _name,
-      _id,
-      _phoneNumber,
-      _type,
-      _userId,
+      email: _email,
+      name: _name,
+      id: _id,
+      phoneNumber: _phoneNumber,
+      type: _type,
+      userId: _userId,
     );
   }).catchError((e, stackTrace) {
     accountServiceLogger.severe('Cannot retrieve session for user');
